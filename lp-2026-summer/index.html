@@ -17,14 +17,14 @@
   <header class="site-header">
     <div class="container header-inner">
       <a href="#" class="logo">
-        <span class="logo-en">VIVIT</span><span class="logo-jp">フェスタ</span>
+        <img src="img/VivitFesta_logo.svg" alt="Vivitフェスタ" class="logo-img">
       </a>
       <nav class="site-nav" aria-label="グローバルナビゲーション">
         <a href="#concept">コンセプト</a>
         <a href="#categories">カテゴリ</a>
         <a href="#booth">ブース</a>
+        <a href="#venue">会場</a>
         <a href="#overview">募集要項</a>
-        <a href="#cancel">キャンセル</a>
         <a href="#faq">FAQ</a>
       </nav>
       <a href="#apply" class="btn btn-primary btn-sm">出店申込</a>
@@ -46,7 +46,7 @@
         </p>
         <div class="hero-cta">
           <a href="#apply" class="btn btn-primary btn-lg">出店を申し込む</a>
-          <a href="#about" class="btn btn-ghost btn-lg">イベントを知る</a>
+          <a href="#concept" class="btn btn-ghost btn-lg">イベントを知る</a>
         </div>
         <dl class="hero-meta">
           <div>
@@ -61,17 +61,16 @@
             <dt>アクセス</dt>
             <dd>原宿 / 北参道</dd>
           </div>
-          <!-- TODO: 出店料が確定したら、ヒーローの表示金額も更新 -->
           <div>
             <dt>出店料</dt>
-            <dd>¥7,000〜</dd>
+            <dd>¥5,000〜</dd>
           </div>
         </dl>
       </div>
     </section>
 
     <section id="concept" class="section">
-      <div class="container section-inner section-narrow">
+      <div class="container section-inner">
         <header class="section-head">
           <p class="section-eyebrow">CONCEPT</p>
           <h2 class="section-title">「好き（トキメキ）」が<br>集まる場所</h2>
@@ -88,29 +87,55 @@
             そんな「好き」という純粋な感情があふれるマルシェです。
           </p>
         </div>
+        <div class="concept-slider" data-slider>
+          <div class="concept-slider-track" data-slider-track>
+            <figure class="concept-slide is-active">
+              <img src="img/vivit_lp_img01.jpg" alt="Vivitフェスタ Vol.1 の様子 1" loading="lazy">
+            </figure>
+            <figure class="concept-slide">
+              <img src="img/vivit_lp_img02.jpg" alt="Vivitフェスタ Vol.1 の様子 2" loading="lazy">
+            </figure>
+            <figure class="concept-slide">
+              <img src="img/vivit_lp_img03.jpg" alt="Vivitフェスタ Vol.1 の様子 3" loading="lazy">
+            </figure>
+            <figure class="concept-slide">
+              <img src="img/vivit_lp_img04.jpg" alt="Vivitフェスタ Vol.1 の様子 4" loading="lazy">
+            </figure>
+            <figure class="concept-slide">
+              <img src="img/vivit_lp_img05.jpg" alt="Vivitフェスタ Vol.1 の様子 5" loading="lazy">
+            </figure>
+          </div>
+          <button type="button" class="concept-slider-btn concept-slider-prev" data-slider-prev aria-label="前のスライド">‹</button>
+          <button type="button" class="concept-slider-btn concept-slider-next" data-slider-next aria-label="次のスライド">›</button>
+          <div class="concept-slider-dots" data-slider-dots>
+            <button type="button" class="concept-slider-dot is-active" data-slider-dot="0" aria-label="スライド 1"></button>
+            <button type="button" class="concept-slider-dot" data-slider-dot="1" aria-label="スライド 2"></button>
+            <button type="button" class="concept-slider-dot" data-slider-dot="2" aria-label="スライド 3"></button>
+            <button type="button" class="concept-slider-dot" data-slider-dot="3" aria-label="スライド 4"></button>
+            <button type="button" class="concept-slider-dot" data-slider-dot="4" aria-label="スライド 5"></button>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- TODO: Vol.2 のサブテーマ本文（タグライン・本文2段落）を正式版に差し替え。公開前に subtheme-note の「※ 仮置き」表示も削除 -->
     <section id="subtheme" class="section section-tinted">
       <div class="container section-inner section-narrow">
         <header class="section-head">
           <p class="section-eyebrow">VOL.2 SUB THEME</p>
-          <h2 class="section-title">夏の余韻に、トキメキを。</h2>
+          <h2 class="section-title">花火咲く縁日で</h2>
         </header>
         <div class="subtheme-card">
-          <p class="subtheme-tagline">"きらめく夏の一日を、自分だけのトキメキで満たして。"</p>
+          <p class="subtheme-tagline">"花火咲く夜空の下、心がビビッと弾むひととき。"</p>
           <p class="subtheme-body">
-            真夏の青空、白いひかり、潮風のにおい。<br>
-            季節がいちばん色濃く感じられるこの時期に、<br>
-            つくり手たちの「好き」が集まります。
+            夕暮れに灯る提灯の橙、夜空に咲く花火、賑わう屋台のざわめき。<br>
+            日常からふっと連れ出してくれる、あの夏祭りの空気。<br>
+            縁日のときめきを、Vivitフェスタで。
           </p>
           <p class="subtheme-body">
-            Vol.2 のサブテーマは「夏」。<br>
-            風鈴のような透明感、ひまわりのような色、夕暮れの匂い──<br>
-            あなたの「好き」が、夏のひとときに彩りを添えます。
+            Vol.2 のサブテーマは「花火咲く縁日で」。<br>
+            浴衣の袖をひるがえし、屋台をめぐるような気持ちで歩くブース。<br>
+            つくり手の「好き」が並ぶ夏の夜に、あなたの心もきっと、咲きます。
           </p>
-          <p class="subtheme-note">※ サブテーマ文言は仮置きです。後日差し替え予定。</p>
         </div>
       </div>
     </section>
@@ -145,16 +170,16 @@
           </article>
         </div>
         <div class="category-callout">
-          <p class="category-callout-eyebrow">VOL.2 サブテーマ「夏」</p>
+          <p class="category-callout-eyebrow">VOL.2 サブテーマ「花火咲く縁日で」</p>
           <p class="category-callout-text">
-            ジャンルを問わず、<strong>夏らしいアイテム</strong>や<strong>夏を感じる商品</strong>を<br class="sp-only">
-            数点ご用意いただける出店者さんは大歓迎です。<br>
-            "夏っぽい商品" ぜひ持ち寄ってください！
+            ジャンルを問わず、<strong>夏を感じる商品</strong>や<br class="sp-only">
+            <strong>花火・縁日</strong>を思わせるアイテムを<br class="sp-only">
+            数点ご用意いただける出店者さん、ぜひお持ち寄りください！
           </p>
         </div>
         <ul class="category-notes">
-          <li><span>※1</span>出展ジャンルの重複を避け、会場全体のバランスを整えるための出展者の調整を行っております。</li>
-          <li><span>※2</span>食品取扱の方は、入金時に「営業許可証」の提出が必須です。</li>
+          <li><span class="category-notes-mark">※1</span><span class="category-notes-text">出展ジャンルの重複を避け、会場全体のバランスを整えるための出展者の調整を行っております。</span></li>
+          <li><span class="category-notes-mark">※2</span><span class="category-notes-text">食品取扱の方は、入金時に「営業許可証」の提出が必須です。詳しくは <a href="food-guideline.html" class="text-link">食品取扱ガイドライン</a> をご確認ください。</span></li>
         </ul>
       </div>
     </section>
@@ -185,54 +210,85 @@
       </div>
     </section>
 
-    <!-- TODO: ブース料金（¥7,000 / ¥8,000 / ¥15,000）を確定金額に更新 -->
     <section id="booth" class="section">
       <div class="container section-inner">
         <header class="section-head">
           <p class="section-eyebrow">BOOTH</p>
           <h2 class="section-title">ブースタイプ & 出店料</h2>
-          <p class="section-lead">※ 料金は仮の金額です。確定次第更新します。</p>
         </header>
-        <!-- TODO: ブースサイズは現状サンプル値。会場のレイアウト確定後に正式な数値へ更新 -->
         <div class="booth-grid">
           <article class="booth-card">
-            <p class="booth-tag">STANDARD</p>
-            <h3>通常ブース</h3>
-            <p class="booth-price"><span class="booth-currency">¥</span>7,000</p>
-            <p class="booth-desc">スタンダードな出店ブース。<br>初めての方にもおすすめです。</p>
+            <p class="booth-tag">CONSIGNMENT</p>
+            <h3>委託ブース</h3>
+            <p class="booth-price"><span class="booth-currency">¥</span>5,000</p>
+            <p class="booth-count"><span class="booth-count-num">3</span><span class="booth-count-unit">ブース</span></p>
+            <p class="booth-desc">棚に飾らせていただきます。<br>受付にてお会計をさせていただきます。</p>
             <dl class="booth-spec">
-              <div><dt>スペース</dt><dd>W180cm × D60cm</dd></div>
-              <div><dt>備品</dt><dd>机1卓・椅子1脚</dd></div>
+              <div><dt>形式</dt><dd>棚展示（無人）</dd></div>
+              <div><dt>注意</dt><dd>送料は出店者様のご負担です</dd></div>
             </dl>
           </article>
           <article class="booth-card booth-card-featured">
-            <p class="booth-tag">RECOMMEND</p>
-            <h3>着替え付きブース</h3>
-            <p class="booth-price"><span class="booth-currency">¥</span>8,000</p>
-            <p class="booth-desc">着替えスペース付き。<br>アパレル・試着のある方に。</p>
+            <p class="booth-tag">STANDARD</p>
+            <h3>通常ブース</h3>
+            <p class="booth-price"><span class="booth-currency">¥</span>9,000</p>
+            <p class="booth-count"><span class="booth-count-num">20</span><span class="booth-count-unit">ブース</span></p>
+            <p class="booth-desc">スタンダードな出店ブース。<br>初めての方にもおすすめです。</p>
             <dl class="booth-spec">
-              <div><dt>スペース</dt><dd>W180cm × D60cm + 着替えスペース</dd></div>
-              <div><dt>備品</dt><dd>机1卓・椅子1脚</dd></div>
+              <div><dt>スペース</dt><dd>W1,500 × D450 × H700mm のテーブル</dd></div>
+            </dl>
+          </article>
+          <article class="booth-card">
+            <p class="booth-tag">LARGE</p>
+            <h3>大きいブース</h3>
+            <p class="booth-price"><span class="booth-currency">¥</span>12,000</p>
+            <p class="booth-count"><span class="booth-count-num">2</span><span class="booth-count-unit">ブース</span></p>
+            <p class="booth-desc">広めのテーブルでゆったりと。<br>商品点数の多い方に。</p>
+            <dl class="booth-spec">
+              <div><dt>スペース</dt><dd>W1,600 × D800 × H700mm のテーブル</dd></div>
             </dl>
           </article>
           <article class="booth-card">
             <p class="booth-tag">PRIVATE</p>
-            <h3>個室貸切</h3>
-            <p class="booth-price"><span class="booth-currency">¥</span>15,000</p>
-            <p class="booth-desc">個室を貸切でご利用可能。<br>こだわりの世界観を演出できます。</p>
+            <h3>控室貸切</h3>
+            <p class="booth-price"><span class="booth-currency">¥</span>19,000</p>
+            <p class="booth-count"><span class="booth-count-num">2</span><span class="booth-count-unit">ブース</span></p>
+            <p class="booth-desc">控室を貸切でご利用可能。<br>こだわりの世界観を演出できます。</p>
             <dl class="booth-spec">
-              <div><dt>スペース</dt><dd>個室1部屋（広さは要相談）</dd></div>
-              <div><dt>備品</dt><dd>机・椅子（数量はご相談に応じます）</dd></div>
+              <div><dt>スペース</dt><dd>約4.1畳（2,450 × 2,730mm）</dd></div>
             </dl>
           </article>
         </div>
-        <!-- TODO: 出展者証の枚数・追加料金（現状: 2枚まで無料／3枚目以降¥500）を運営内で正式決定し、表記を更新 -->
         <div class="booth-common">
           <p class="booth-common-title">全ブース共通</p>
           <ul>
             <li><strong>出展者証</strong>（首下げ式）：1ブースにつき<strong>2枚まで無料</strong>で発行いたします。3枚目以降が必要な場合は、1枚あたり<strong>¥500</strong>の追加費用を頂戴します。</li>
             <li><strong>電源</strong>：ご利用いただけます（応募フォームにて事前にご相談ください）。<strong>水道</strong>はご利用いただけません。</li>
           </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="venue" class="section">
+      <div class="container section-inner">
+        <header class="section-head">
+          <p class="section-eyebrow">VENUE</p>
+          <h2 class="section-title">会場のご紹介</h2>
+        </header>
+        <div class="venue-card">
+          <div class="venue-text">
+            <p class="venue-name">GOBLIN.</p>
+            <p class="venue-access">原宿駅 竹下口より徒歩7分</p>
+            <p class="venue-desc">住宅街に佇む会場です。</p>
+          </div>
+          <div class="venue-gallery">
+            <figure class="venue-gallery-item">
+              <img src="img/goblin_1.png" alt="GOBLIN. 会場の様子 1" loading="lazy">
+            </figure>
+            <figure class="venue-gallery-item">
+              <img src="img/goblin_2.png" alt="GOBLIN. 会場の様子 2" loading="lazy">
+            </figure>
+          </div>
         </div>
       </div>
     </section>
@@ -244,10 +300,13 @@
           <h2 class="section-title">募集要項</h2>
         </header>
         <div class="overview-table">
-          <!-- TODO: 開催時間（例: 10:00–17:00）が決まり次第、「※開催時間は未定」を実時間に置き換え -->
           <div class="overview-row">
-            <div class="overview-key">開催日</div>
-            <div class="overview-val">2026年8月1日（土） <span class="overview-note">※開催時間は未定</span></div>
+            <div class="overview-key">開催日時</div>
+            <div class="overview-val">
+              2026年8月1日（土）11:30〜17:00<br>
+              <span class="overview-sub">設営 10:00〜 ／ 撤収 17:00〜18:30</span><br>
+              <span class="overview-note">※ スケジュールは変更となる可能性がございます。</span>
+            </div>
           </div>
           <div class="overview-row">
             <div class="overview-key">会場</div>
@@ -260,20 +319,23 @@
             <div class="overview-key">アクセス</div>
             <div class="overview-val">原宿駅より徒歩7分 ／ 北参道駅より徒歩6分</div>
           </div>
-          <!-- TODO: 出店料が確定したら、表示と「／仮料金」表記を削除 -->
           <div class="overview-row">
             <div class="overview-key">出店料</div>
-            <div class="overview-val">¥7,000 〜 ¥15,000（ブースタイプによる／仮料金）</div>
+            <div class="overview-val">¥5,000 〜 ¥19,000（ブースタイプによる）</div>
           </div>
-          <!-- TODO: 募集ブース数を確定値に更新 -->
           <div class="overview-row">
             <div class="overview-key">募集ブース数</div>
-            <div class="overview-val">未定</div>
+            <div class="overview-val">
+              全27ブース
+              <span class="overview-sub">委託3 ／ 通常20 ／ 大きい2 ／ 控室2</span>
+            </div>
           </div>
-          <!-- TODO: 応募締切日（例: 2026年6月30日23:59）を確定したら更新 -->
           <div class="overview-row">
             <div class="overview-key">応募締切</div>
-            <div class="overview-val">未定</div>
+            <div class="overview-val">
+              2026年6月30日（火）23:59 まで<br>
+              <span class="overview-note">※ 諸事情により締切日が前後したり、応募状況によっては早めに締め切らせていただく場合がございます。お早めのご応募をおすすめいたします。</span>
+            </div>
           </div>
         </div>
       </div>
@@ -378,26 +440,16 @@
             <p>はい、個人の作家・事業者の方も歓迎しております。</p>
           </details>
           <details class="faq-item">
-            <summary>過去に出店した方の優先枠はありますか？</summary>
-            <p>はい、リピーターの方には優先枠をご用意しております。</p>
-          </details>
-          <details class="faq-item">
             <summary>出店者同士のコラボレーション・マッチングについて教えてください</summary>
-            <p>Vivitフェスタでは、相性の良い出店者同士のコラボレーションを促進しています。例えばお菓子を販売されている方とハーブティーを販売されている方は、組み合わせとして一緒に購入されるお客様も多いため、各出店者の販売スペースの一部にお互いの商品を置いて宣伝していただくケースがあります。ご購入の際はそれぞれの出店場所をお客様にご案内し、各々のブースでお会計をしていただきます。マッチしそうな出店者がいる場合は、運営よりご紹介させていただくこともあります。</p>
-          </details>
-          <!-- TODO: コラボ時の盗難・破損ポリシー（責任範囲、補償の有無、初対面の出展者との取り扱いなど）を運営内で整理し、回答を更新 -->
-          <details class="faq-item">
-            <summary>コラボの際、作品の盗難や破損があった場合の対応は？</summary>
-            <p>現在、運営にて方針をまとめております。詳細が決まり次第こちらに掲載いたします。</p>
-          </details>
-          <!-- TODO: 出店可否の連絡時期が決まり次第、回答を更新 -->
-          <details class="faq-item">
-            <summary>出店可否の連絡はいつ頃きますか？</summary>
-            <p>現在調整中です。詳細が決まり次第こちらに掲載いたします。</p>
+            <p>Vivitフェスタでは、相性の良い出店者同士のコラボレーションを促進しています。例えばお菓子を販売されている方とハーブティーを販売されている方は、組み合わせとして一緒に購入されるお客様も多いため、各出店者の販売スペースの一部にお互いの商品を置かせていただく、などです。ご購入の際はそれぞれの出店場所をお客様にご案内し、各々のブースでお会計をしていただきます。マッチしそうな出店者がいる場合は、運営よりご紹介させていただき、双方のご了承があった場合にコラボレーションをご提案させていただきます。</p>
           </details>
           <details class="faq-item">
             <summary>ブースに含まれるものは？</summary>
             <p>机と椅子をご用意しております。</p>
+          </details>
+          <details class="faq-item">
+            <summary>食品を販売・提供したいのですが、注意点はありますか？</summary>
+            <p>包装済み食品の表示義務、試食・試飲・カフェ形式での提供、匂いの強い食品、夏場の温度管理、ゴミの取り扱い、電源・火器の使用申請などについて、別ページにまとめております。<a href="food-guideline.html" class="text-link">食品取扱ガイドラインはこちら</a></p>
           </details>
           <details class="faq-item">
             <summary>電源・水道の利用はできますか？</summary>
@@ -407,10 +459,9 @@
             <summary>搬入・搬出の時間は？</summary>
             <p>開場時間の1時間前頃から搬入いただける予定です。詳細な時間は決まり次第ご案内いたします。</p>
           </details>
-          <!-- TODO: 駐車場・車での搬入可否を確認後、回答を更新 -->
           <details class="faq-item">
             <summary>車での搬入・駐車場はありますか？</summary>
-            <p>現在確認中です。詳細が決まり次第こちらに掲載いたします。</p>
+            <p>会場に駐車場のご用意はございません。可能でしたら、公共交通機関のご利用にご協力いただけますと幸いです。お車でお越しの場合は、お手数ですが近隣のコインパーキングをご活用ください。</p>
           </details>
           <details class="faq-item">
             <summary>当日のスタッフは何人まで入れますか？</summary>
@@ -433,8 +484,6 @@
             以下のフォームから必要事項をご入力のうえ、ご応募ください。
           </p>
         </header>
-        <!-- TODO: Googleフォームを差し替える場合は、下記 iframe の src のみ書き換える -->
-        <!-- Googleフォーム埋め込み（差し替え時はこのiframeのsrcのみ変更） -->
         <div class="form-embed">
           <iframe
             src="https://docs.google.com/forms/d/e/1FAIpQLSc9z37Lv4o7FhluFQObOlIX-H4qKu8gtzFmbzK8LspQA8Nr4w/viewform?embedded=true"
@@ -454,7 +503,7 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-brand">
-        <span class="logo-en">VIVIT</span><span class="logo-jp">フェスタ</span>
+        <img src="img/VivitFesta_logo.svg" alt="Vivitフェスタ" class="logo-img footer-logo">
       </div>
       <div class="footer-meta">
         <p class="footer-org">主催 <span>株式会社Sunny Spot</span></p>
@@ -462,5 +511,163 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    (function () {
+      var AUTOPLAY_INTERVAL = 5000;
+      var RESUME_DELAY = 8000;
+
+      document.querySelectorAll('[data-slider]').forEach(function (slider) {
+        var track = slider.querySelector('[data-slider-track]');
+        var prev = slider.querySelector('[data-slider-prev]');
+        var next = slider.querySelector('[data-slider-next]');
+        var dots = slider.querySelectorAll('[data-slider-dot]');
+        if (!track) return;
+
+        var originals = Array.prototype.slice.call(track.querySelectorAll('.concept-slide'));
+        var count = originals.length;
+        if (count < 2) return;
+
+        // Clone last/first slides as side neighbors so peek shows true loop
+        var leadClone = originals[count - 1].cloneNode(true);
+        var trailClone = originals[0].cloneNode(true);
+        [leadClone, trailClone].forEach(function (el) {
+          el.classList.add('is-clone');
+          el.classList.remove('is-active');
+          el.setAttribute('aria-hidden', 'true');
+        });
+        track.insertBefore(leadClone, originals[0]);
+        track.appendChild(trailClone);
+
+        var slides = track.querySelectorAll('.concept-slide');
+        // slides[0] = leadClone (last), slides[1..count] = originals, slides[count+1] = trailClone (first)
+
+        function step() {
+          var styles = getComputedStyle(track);
+          var gap = parseFloat(styles.columnGap || styles.gap || 0) || 0;
+          return slides[1].getBoundingClientRect().width + gap;
+        }
+
+        function currentDom() {
+          var w = step();
+          if (!w) return 1;
+          return Math.round(track.scrollLeft / w);
+        }
+
+        function setActive(domIdx) {
+          var logical;
+          if (domIdx <= 0) logical = count - 1;
+          else if (domIdx >= count + 1) logical = 0;
+          else logical = domIdx - 1;
+          slides.forEach(function (s, i) {
+            s.classList.toggle('is-active', i === domIdx);
+          });
+          dots.forEach(function (d, i) {
+            d.classList.toggle('is-active', i === logical);
+          });
+        }
+
+        function smoothToDom(domIdx) {
+          var w = step();
+          if (!w) return;
+          track.scrollTo({ left: w * domIdx, behavior: 'smooth' });
+        }
+
+        function rawJump(domIdx) {
+          var w = step();
+          if (!w) return;
+          var prevSnap = track.style.scrollSnapType;
+          var prevBehavior = track.style.scrollBehavior;
+          track.style.scrollSnapType = 'none';
+          track.style.scrollBehavior = 'auto';
+          track.scrollLeft = w * domIdx;
+          void track.offsetHeight;
+          track.style.scrollSnapType = prevSnap;
+          track.style.scrollBehavior = prevBehavior;
+        }
+
+        function jumpToDom(domIdx, targetActive) {
+          slider.classList.add('is-jumping');
+          if (targetActive !== undefined) setActive(targetActive);
+          rawJump(domIdx);
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+              slider.classList.remove('is-jumping');
+            });
+          });
+        }
+
+        function goNext() { smoothToDom(currentDom() + 1); }
+        function goPrev() { smoothToDom(currentDom() - 1); }
+        function goToLogical(idx) { smoothToDom(idx + 1); }
+
+        function handleSettled() {
+          var dom = currentDom();
+          if (dom <= 0) jumpToDom(count, count);
+          else if (dom >= count + 1) jumpToDom(1, 1);
+          else setActive(dom);
+        }
+
+        if ('onscrollend' in window) {
+          track.addEventListener('scrollend', handleSettled);
+        } else {
+          var scrollDebounce;
+          track.addEventListener('scroll', function () {
+            clearTimeout(scrollDebounce);
+            scrollDebounce = setTimeout(handleSettled, 90);
+          }, { passive: true });
+        }
+
+        var raf = null;
+        track.addEventListener('scroll', function () {
+          if (raf) return;
+          raf = requestAnimationFrame(function () {
+            raf = null;
+            setActive(currentDom());
+          });
+        }, { passive: true });
+
+        var autoplayTimer = null;
+        var resumeTimer = null;
+        function startAutoplay() {
+          stopAutoplay();
+          autoplayTimer = setInterval(goNext, AUTOPLAY_INTERVAL);
+        }
+        function stopAutoplay() {
+          if (autoplayTimer) { clearInterval(autoplayTimer); autoplayTimer = null; }
+        }
+        function pauseAutoplay() {
+          stopAutoplay();
+          if (resumeTimer) clearTimeout(resumeTimer);
+          resumeTimer = setTimeout(startAutoplay, RESUME_DELAY);
+        }
+
+        if (prev) prev.addEventListener('click', function () { goPrev(); pauseAutoplay(); });
+        if (next) next.addEventListener('click', function () { goNext(); pauseAutoplay(); });
+        dots.forEach(function (dot, i) {
+          dot.addEventListener('click', function () { goToLogical(i); pauseAutoplay(); });
+        });
+
+        slider.addEventListener('mouseenter', stopAutoplay);
+        slider.addEventListener('mouseleave', startAutoplay);
+        track.addEventListener('touchstart', pauseAutoplay, { passive: true });
+        track.addEventListener('wheel', pauseAutoplay, { passive: true });
+
+        var resizeTimer;
+        window.addEventListener('resize', function () {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(function () {
+            var dom = currentDom();
+            jumpToDom(Math.max(1, Math.min(count, dom)));
+          }, 120);
+        });
+
+        // Initialize: position at the real first slide (DOM idx 1) before paint
+        jumpToDom(1);
+        setActive(1);
+        startAutoplay();
+      });
+    })();
+  </script>
 </body>
 </html>
