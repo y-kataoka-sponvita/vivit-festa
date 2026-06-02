@@ -837,6 +837,18 @@ p { margin: 0; }
   color: var(--color-muted);
   margin-left: 8px;
 }
+.overview-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: var(--color-cream);
+  background: var(--color-accent);
+  padding: 3px 12px;
+  border-radius: var(--radius-pill);
+  margin-right: 10px;
+  vertical-align: 2px;
+}
 
 @media (max-width: 640px) {
   .overview-row { grid-template-columns: 1fr; }

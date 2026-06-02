@@ -330,7 +330,16 @@
               <span class="overview-sub">委託3 ／ 通常20 ／ 大きい2 ／ 控室2</span>
             </div>
           </div>
-          <div class="overview-row">
+          <div class="overview-row" data-phase="phase1">
+            <div class="overview-key">応募締切</div>
+            <div class="overview-val">
+              <span class="overview-tag">1次申込</span>
+              2026年6月14日（日）23:59 まで<br>
+              <span class="overview-note">※ 1次申込で枠が埋まらなかった場合、引き続き2次申込を実施いたします。</span>
+              <span class="overview-note">※ 諸事情により締切日が前後したり、応募状況によっては早めに締め切らせていただく場合がございます。お早めのご応募をおすすめいたします。</span>
+            </div>
+          </div>
+          <div class="overview-row" data-phase="phase2" style="display:none">
             <div class="overview-key">応募締切</div>
             <div class="overview-val">
               2026年6月30日（火）23:59 まで<br>
@@ -513,6 +522,18 @@
   </footer>
 
   <script>
+    // Phase switcher for application deadline (1次 → 2次 at 2026-06-15 00:00 JST)
+    (function () {
+      var cutoff = new Date('2026-06-15T00:00:00+09:00').getTime();
+      if (Date.now() < cutoff) return;
+      document.querySelectorAll('[data-phase="phase1"]').forEach(function (el) {
+        el.style.display = 'none';
+      });
+      document.querySelectorAll('[data-phase="phase2"]').forEach(function (el) {
+        el.style.display = '';
+      });
+    })();
+
     (function () {
       var AUTOPLAY_INTERVAL = 5000;
       var RESUME_DELAY = 8000;
