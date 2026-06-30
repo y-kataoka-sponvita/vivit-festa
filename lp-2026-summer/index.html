@@ -346,6 +346,15 @@
               <span class="overview-note">※ 諸事情により締切日が前後したり、応募状況によっては早めに締め切らせていただく場合がございます。お早めのご応募をおすすめいたします。</span>
             </div>
           </div>
+          <div class="overview-row" data-phase="closed" style="display:none">
+            <div class="overview-key">応募締切</div>
+            <div class="overview-val">
+              <span class="overview-tag overview-tag-closed">受付終了</span>
+              出店申込の受付を終了しました。<br>
+              たくさんのご応募をいただき、誠にありがとうございました。<br>
+              <span class="overview-note">※ キャンセル等により空き枠が出た場合は、改めて追加募集のご案内をいたします。</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -488,12 +497,13 @@
       <div class="container section-inner section-narrow">
         <header class="section-head">
           <p class="section-eyebrow">APPLY</p>
-          <h2 class="section-title">出店申込フォーム</h2>
-          <p class="section-lead">
+          <h2 class="section-title" data-apply-open>出店申込フォーム</h2>
+          <h2 class="section-title" data-apply-closed style="display:none">出店申込について</h2>
+          <p class="section-lead" data-apply-open>
             以下のフォームから必要事項をご入力のうえ、ご応募ください。
           </p>
         </header>
-        <div class="form-embed">
+        <div class="form-embed" data-apply-open>
           <iframe
             src="https://docs.google.com/forms/d/e/1FAIpQLSc9z37Lv4o7FhluFQObOlIX-H4qKu8gtzFmbzK8LspQA8Nr4w/viewform?embedded=true"
             width="100%"
@@ -504,6 +514,16 @@
             title="Vivitフェスタ 2026 夏 出店申込フォーム">
             読み込んでいます…
           </iframe>
+        </div>
+        <div class="apply-closed" data-apply-closed style="display:none">
+          <p class="apply-closed-tag">受付終了</p>
+          <p class="apply-closed-title">出店申込の受付を終了しました</p>
+          <p class="apply-closed-text">
+            この度はたくさんのご応募をいただき、誠にありがとうございました。<br>
+            現在、出店申込の受付を終了しております。<br>
+            今後キャンセル等により空き枠が出た場合は、<br class="sp-only">
+            改めて追加募集のご案内をいたします。
+          </p>
         </div>
       </div>
     </section>
@@ -522,16 +542,31 @@
   </footer>
 
   <script>
-    // Phase switcher for application deadline (1次 → 2次 at 2026-06-15 00:00 JST)
+    // Phase switcher for application deadline.
+    //   phase1 → phase2 : 2026-06-15 00:00 JST
+    //   → 受付終了(closed): 2026-07-01 00:00 JST
     (function () {
-      var cutoff = new Date('2026-06-15T00:00:00+09:00').getTime();
-      if (Date.now() < cutoff) return;
-      document.querySelectorAll('[data-phase="phase1"]').forEach(function (el) {
-        el.style.display = 'none';
-      });
-      document.querySelectorAll('[data-phase="phase2"]').forEach(function (el) {
-        el.style.display = '';
-      });
+      var phase2At = new Date('2026-06-15T00:00:00+09:00').getTime();
+      var closeAt = new Date('2026-07-01T00:00:00+09:00').getTime();
+      var now = Date.now();
+
+      function setDisplay(selector, show) {
+        document.querySelectorAll(selector).forEach(function (el) {
+          el.style.display = show ? '' : 'none';
+        });
+      }
+
+      if (now >= closeAt) {
+        // 募集締切：締切表記の差し替え＋フォームを隠して終了メッセージを表示
+        setDisplay('[data-phase="phase1"]', false);
+        setDisplay('[data-phase="phase2"]', false);
+        setDisplay('[data-phase="closed"]', true);
+        setDisplay('[data-apply-open]', false);
+        setDisplay('[data-apply-closed]', true);
+      } else if (now >= phase2At) {
+        setDisplay('[data-phase="phase1"]', false);
+        setDisplay('[data-phase="phase2"]', true);
+      }
     })();
 
     (function () {
