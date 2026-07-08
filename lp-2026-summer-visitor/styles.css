@@ -1426,7 +1426,7 @@ p { margin: 0; }
   display: grid;
   gap: 22px;
 }
-.coupon-field { display: grid; gap: 8px; }
+.coupon-field { display: grid; gap: 8px; min-width: 0; }
 .coupon-field label {
   font-size: 14px;
   font-weight: 700;
@@ -1447,6 +1447,8 @@ p { margin: 0; }
 .coupon-req { color: #fff; background: var(--color-accent); }
 .coupon-opt { color: var(--color-ink-soft); background: var(--color-surface-tinted); }
 .coupon-field input {
+  width: 100%;
+  min-width: 0;
   font-family: inherit;
   font-size: 16px;
   color: var(--color-ink);
