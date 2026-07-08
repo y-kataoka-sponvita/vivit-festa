@@ -1287,6 +1287,10 @@ p { margin: 0; }
    Visitor LP additions (2026 summer / 来場者向け)
    ===================================================================== */
 
+/* ---- 横あふれの安全網（実機スマホでの横スクロール防止） ---- */
+/* clip は hidden と違いスクロールコンテナを作らないので sticky ヘッダーを壊さない */
+html, body { overflow-x: clip; }
+
 /* ---- Hero: photo background (scent一致：リール流入の実写に合わせる) ---- */
 .hero-visitor { padding-block: clamp(56px, 8vw, 96px); }
 .hero-visitor .hero-bg {
@@ -1371,6 +1375,8 @@ p { margin: 0; }
 .hero-coupon-btn { width: min(100%, 360px); }
 
 .hero-meta-sub { font-size: 0.7em; font-weight: 700; margin-left: 2px; }
+/* grid子の既定 min-width:auto を解除して、狭い画面でメタ枠が横あふれしないように */
+.hero-visitor .hero-meta > div { min-width: 0; }
 
 /* ---- Coupon points ---- */
 .coupon-points {
@@ -1412,6 +1418,8 @@ p { margin: 0; }
   font-size: 15px;
 }
 .coupon-cta { text-align: center; }
+/* 長いCTA文言（先着100名のクーポンに登録する）が狭い画面で箱をはみ出さないよう折り返し可に */
+.coupon-cta .btn { white-space: normal; max-width: 100%; }
 
 @media (max-width: 560px) {
   .coupon-points { grid-template-columns: 1fr; }
@@ -1464,7 +1472,7 @@ p { margin: 0; }
   border-color: var(--color-primary);
   box-shadow: 0 0 0 3px rgba(62, 32, 109, 0.12);
 }
-.coupon-submit { width: 100%; margin-top: 4px; }
+.coupon-submit { width: 100%; margin-top: 4px; white-space: normal; }
 .coupon-form-note {
   font-size: 12.5px;
   line-height: 1.8;
