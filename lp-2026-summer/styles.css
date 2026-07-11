@@ -668,6 +668,44 @@ p { margin: 0; }
   font-size: 11px;
   letter-spacing: 0.08em;
 }
+
+/* ---- 残席バッジ / 満席（追加募集） ---- */
+.booth-stock {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+  margin-bottom: 16px;
+  padding: 5px 16px;
+  border-radius: var(--radius-pill);
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+}
+.booth-stock-num {
+  font-size: 19px;
+  margin: 0 3px;
+}
+.booth-stock-left {
+  background: rgba(212, 62, 33, 0.12);
+  color: var(--color-accent);
+}
+.booth-stock-soldout {
+  background: var(--color-surface-tinted);
+  color: var(--color-muted);
+}
+/* 満席カードは情報を残しつつ、視覚的に一段リセスさせる */
+.booth-card-soldout {
+  background: var(--color-surface-tinted);
+}
+.booth-card-soldout .booth-price,
+.booth-card-soldout h3 {
+  color: var(--color-muted);
+}
+.booth-card-soldout:hover {
+  transform: none;
+  box-shadow: var(--shadow-sm);
+}
+
 .booth-desc {
   color: var(--color-ink-soft);
   font-size: 14px;
