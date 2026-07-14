@@ -370,14 +370,17 @@
         // 送信中の状態を表示
         if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = '送信中…'; }
 
-        // 通常の fetch（no-cors/keepalive は使わない）。
-        // GASウェブアプリはCORSヘッダを返さないため応答取得は catch に入るが、
-        // その時点でサーバ側の doPost（スプレッドシート記録・自動返信）は実行済み。
+        // 送信（通常の fetch。no-cors/keepalive は使わない）。
+        // GASウェブアプリはCORSヘッダを返さず、応答が確定しない/読めないため、
+        // UIはこの応答に依存させない（依存させると「送信中」で固まる）。
+        // 通常の fetch は DOM を書き換えても中断されないので、フォームを消した後も
+        // 裏側で送信は完了し、doPost（スプレッドシート記録・自動返信）が実行される。
         // URLSearchParams（application/x-www-form-urlencoded）はプリフライトが発生せず、
-        // GAS側で e.parameter として受け取れる。成否に関わらず finally で完了表示へ。
-        fetch(FORM_ENDPOINT, { method: 'POST', body: body })
-          .catch(function () { /* CORSによる応答不可は想定内。記録は完了している */ })
-          .then(function () { showDone(); });
+        // GAS側で e.parameter として受け取れる。
+        fetch(FORM_ENDPOINT, { method: 'POST', body: body }).catch(function () {});
+
+        // 「送信中」を少し見せてから、確実に完了表示へ切り替える
+        setTimeout(showDone, 900);
       });
     })();
 
