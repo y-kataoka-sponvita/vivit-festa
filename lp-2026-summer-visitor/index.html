@@ -248,12 +248,6 @@
           </p>
         </header>
 
-        <!--
-          TODO: メールフォームの連携先は未設定。
-          送信先（Google Form / API / メール配信サービス等）が決まったら、
-          <form> の action / method / name 属性を差し替え、下部 <script> の
-          プレビュー用ハンドラを外してください。
-        -->
         <form class="coupon-form" data-coupon-form novalidate>
           <div class="coupon-field">
             <label for="cf-email">メールアドレス <span class="coupon-req">必須</span></label>
@@ -266,6 +260,9 @@
                    placeholder="ビビ子">
           </div>
           <button type="submit" class="btn btn-primary btn-lg coupon-submit">300円クーポンを受け取る</button>
+          <p class="coupon-error" data-coupon-error hidden role="alert">
+            登録に失敗いたしました。お手数ですが、時間をおいて<br class="sp-only">もう一度お試しください。
+          </p>
           <p class="coupon-form-note">
             ボタンを押すと、ご登録のメールアドレス宛にVivitフェスタのイベント情報をお送りします。<br>
             300円クーポンは、開催の約1週間前にメールでお届けします。<br>
@@ -339,9 +336,20 @@
     // デプロイ手順は gas/README.md を参照。
     var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbx9m5eKvea0Awl3Kx-pr5j3C4gvwDf82i7LSnvN7bYhbMmTX1Ib1a6PTn7c350piTsBKA/exec';
     (function () {
+      var SUBMIT_LABEL = '300円クーポンを受け取る';
+      var TIMEOUT_MS = 15000; // GASのコールドスタートを考慮した猶予
+
       var form = document.querySelector('[data-coupon-form]');
       var done = document.querySelector('[data-coupon-done]');
+      var errorEl = document.querySelector('[data-coupon-error]');
       if (!form) return;
+      var submitBtn = form.querySelector('.coupon-submit');
+
+      function setSubmitting(on) {
+        if (!submitBtn) return;
+        submitBtn.disabled = on;
+        submitBtn.textContent = on ? '送信中…' : SUBMIT_LABEL;
+      }
 
       function showDone() {
         form.hidden = true;
@@ -351,36 +359,60 @@
         }
       }
 
+      function showError() {
+        setSubmitting(false);
+        if (errorEl) errorEl.hidden = false;
+      }
+
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         if (!form.reportValidity()) return;
+
+        if (errorEl) errorEl.hidden = true;
 
         // 未接続時はプレビュー（完了表示のみ）
         if (!FORM_ENDPOINT) { showDone(); return; }
 
         var emailEl = form.querySelector('input[name="email"]');
         var nameEl = form.querySelector('input[name="name"]');
-        var submitBtn = form.querySelector('.coupon-submit');
         var body = new URLSearchParams({
           email: emailEl ? emailEl.value.trim() : '',
           name: nameEl ? nameEl.value.trim() : '',
           source: 'lp-2026-summer-visitor'
         });
 
-        // 送信中の状態を表示
-        if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = '送信中…'; }
+        setSubmitting(true);
 
-        // 送信（通常の fetch。no-cors/keepalive は使わない）。
-        // GASウェブアプリはCORSヘッダを返さず、応答が確定しない/読めないため、
-        // UIはこの応答に依存させない（依存させると「送信中」で固まる）。
-        // 通常の fetch は DOM を書き換えても中断されないので、フォームを消した後も
-        // 裏側で送信は完了し、doPost（スプレッドシート記録・自動返信）が実行される。
-        // URLSearchParams（application/x-www-form-urlencoded）はプリフライトが発生せず、
-        // GAS側で e.parameter として受け取れる。
-        fetch(FORM_ENDPOINT, { method: 'POST', body: body }).catch(function () {});
+        // GASウェブアプリは 302→JSON を返し、いずれも Access-Control-Allow-Origin: * 付き
+        // のため、通常の fetch で応答本文を読める。URLSearchParams（urlencoded）は
+        // プリフライトが発生せず、GAS側で e.parameter として受け取れる。
+        // 応答が返らない場合に固まらないよう、タイムアウトで中断してエラー表示する。
+        var controller = ('AbortController' in window) ? new AbortController() : null;
+        var timer = setTimeout(function () {
+          if (controller) controller.abort();
+        }, TIMEOUT_MS);
 
-        // 「送信中」を少し見せてから、確実に完了表示へ切り替える
-        setTimeout(showDone, 900);
+        fetch(FORM_ENDPOINT, {
+          method: 'POST',
+          body: body,
+          signal: controller ? controller.signal : undefined
+        })
+          .then(function (res) { return res.text(); })
+          .then(function (text) {
+            clearTimeout(timer);
+            var data = null;
+            try { data = JSON.parse(text); } catch (err) { /* JSON以外は失敗扱い */ }
+            if (data && data.ok) {
+              showDone(); // 重複登録(duplicated)や満了(full)も登録成功として扱う
+            } else {
+              showError();
+            }
+          })
+          .catch(function () {
+            // タイムアウト / ネットワーク不通 / 応答読み取り不可
+            clearTimeout(timer);
+            showError();
+          });
       });
     })();
 
