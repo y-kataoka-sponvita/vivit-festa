@@ -397,13 +397,9 @@
           body: body,
           signal: controller ? controller.signal : undefined
         })
-          .then(function (res) {
-            console.log('[coupon-form] status:', res.status, '/ type:', res.type, '/ redirected:', res.redirected, '/ url:', res.url);
-            return res.text();
-          })
+          .then(function (res) { return res.text(); })
           .then(function (text) {
             clearTimeout(timer);
-            console.log('[coupon-form] body:', text);
             var data = null;
             try { data = JSON.parse(text); } catch (err) { /* JSON以外は失敗扱い */ }
             // 実際に書き込まれた証拠（seq）または重複登録のときだけ成功扱い。
@@ -412,14 +408,12 @@
             if (registered) {
               showDone(); // 重複登録(duplicated)や満了(full)も登録成功として扱う
             } else {
-              console.error('[coupon-form] 登録応答が不正です:', text);
               showError();
             }
           })
-          .catch(function (err) {
+          .catch(function () {
             // タイムアウト / ネットワーク不通 / 応答読み取り不可
             clearTimeout(timer);
-            console.error('[coupon-form] 送信に失敗しました:', err);
             showError();
           });
       });
