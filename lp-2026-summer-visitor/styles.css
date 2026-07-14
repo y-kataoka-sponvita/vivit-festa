@@ -1434,6 +1434,8 @@ html, body { overflow-x: clip; }
   display: grid;
   gap: 22px;
 }
+/* display:grid が hidden属性(display:none)を上書きしてしまうため、明示的に打ち消す */
+.coupon-form[hidden] { display: none; }
 .coupon-field { display: grid; gap: 8px; min-width: 0; }
 .coupon-field label {
   font-size: 14px;
