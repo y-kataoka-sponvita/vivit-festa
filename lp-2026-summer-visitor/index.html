@@ -397,9 +397,13 @@
           body: body,
           signal: controller ? controller.signal : undefined
         })
-          .then(function (res) { return res.text(); })
+          .then(function (res) {
+            console.log('[coupon-form] status:', res.status, '/ type:', res.type, '/ redirected:', res.redirected, '/ url:', res.url);
+            return res.text();
+          })
           .then(function (text) {
             clearTimeout(timer);
+            console.log('[coupon-form] body:', text);
             var data = null;
             try { data = JSON.parse(text); } catch (err) { /* JSON以外は失敗扱い */ }
             // 実際に書き込まれた証拠（seq）または重複登録のときだけ成功扱い。
