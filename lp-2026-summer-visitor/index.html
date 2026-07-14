@@ -402,15 +402,20 @@
             clearTimeout(timer);
             var data = null;
             try { data = JSON.parse(text); } catch (err) { /* JSON以外は失敗扱い */ }
-            if (data && data.ok) {
+            // 実際に書き込まれた証拠（seq）または重複登録のときだけ成功扱い。
+            // doGet の {ok:true,message} 等を誤って成功にしないためのガード。
+            var registered = !!(data && data.ok && (typeof data.seq !== 'undefined' || data.duplicated));
+            if (registered) {
               showDone(); // 重複登録(duplicated)や満了(full)も登録成功として扱う
             } else {
+              console.error('[coupon-form] 登録応答が不正です:', text);
               showError();
             }
           })
-          .catch(function () {
+          .catch(function (err) {
             // タイムアウト / ネットワーク不通 / 応答読み取り不可
             clearTimeout(timer);
+            console.error('[coupon-form] 送信に失敗しました:', err);
             showError();
           });
       });
