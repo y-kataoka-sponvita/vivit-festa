@@ -1548,3 +1548,10 @@ html, body { overflow-x: clip; }
 @media (max-width: 720px) {
   .sticky-cta { display: flex; }
 }
+
+/* ---- 開催情報：会場のGoogleマップリンク ---- */
+.overview-map-link {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 13.5px;
+}
