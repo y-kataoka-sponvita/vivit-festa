@@ -1555,3 +1555,22 @@ html, body { overflow-x: clip; }
   margin-top: 10px;
   font-size: 13.5px;
 }
+
+/* ---- 開催情報：埋め込み地図（小さめ） ---- */
+.venue-map {
+  margin-top: 16px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+  box-shadow: var(--shadow-sm);
+  background: var(--color-surface-tinted);
+}
+.venue-map iframe {
+  display: block;
+  width: 100%;
+  height: 240px;
+  border: 0;
+}
+@media (max-width: 640px) {
+  .venue-map iframe { height: 200px; }
+}
