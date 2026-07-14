@@ -360,24 +360,24 @@
 
         var emailEl = form.querySelector('input[name="email"]');
         var nameEl = form.querySelector('input[name="name"]');
-        var submitBtn = form.querySelector('.coupon-submit');
         var body = new URLSearchParams({
           email: emailEl ? emailEl.value.trim() : '',
           name: nameEl ? nameEl.value.trim() : '',
           source: 'lp-2026-summer-visitor'
         });
 
-        if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = '送信中…'; }
-
-        // GASウェブアプリはCORSレスポンスを返さないため no-cors で fire-and-forget。
+        // GASウェブアプリはCORSレスポンス（＋リダイレクト）を返し、no-cors では
+        // 応答を読めない。応答待ちにすると完了表示に切り替わらないため、
+        // fire-and-forget で投げて、UIは即座に完了表示へ切り替える。
+        // keepalive: 画面切替後もリクエストを最後まで送り切る。
         // URLSearchParams（application/x-www-form-urlencoded）はプリフライトが発生せず、
         // GAS側で e.parameter として受け取れる。
-        fetch(FORM_ENDPOINT, { method: 'POST', mode: 'no-cors', body: body })
-          .then(function () { showDone(); })
-          .catch(function () {
-            if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '300円クーポンを受け取る'; }
-            alert('送信に失敗しました。通信環境をご確認のうえ、もう一度お試しください。');
-          });
+        try {
+          fetch(FORM_ENDPOINT, { method: 'POST', mode: 'no-cors', body: body, keepalive: true });
+        } catch (err) {
+          /* 送信キューイング失敗時も記録優先で完了表示 */
+        }
+        showDone();
       });
     })();
 
