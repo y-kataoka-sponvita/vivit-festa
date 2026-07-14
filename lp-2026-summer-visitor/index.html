@@ -333,21 +333,51 @@
   </a>
 
   <script>
-    // ===== クーポン登録フォーム（プレビュー用） =====
-    // TODO: 送信先が未接続。連携先が決まったらこのブロックを実際の送信処理に差し替える。
+    // ===== クーポン登録フォーム =====
+    // GAS（Google Apps Script）ウェブアプリのURLをここに貼ると実送信されます。
+    // 空のままだと送信せず、完了表示のみのプレビュー動作になります。
+    // デプロイ手順は gas/README.md を参照。
+    var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbx9m5eKvea0Awl3Kx-pr5j3C4gvwDf82i7LSnvN7bYhbMmTX1Ib1a6PTn7c350piTsBKA/exec';
     (function () {
       var form = document.querySelector('[data-coupon-form]');
       var done = document.querySelector('[data-coupon-done]');
       if (!form) return;
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        if (!form.reportValidity()) return;
-        // 送信先未接続のため、UIプレビューとして完了表示のみ切り替える
+
+      function showDone() {
         form.hidden = true;
         if (done) {
           done.hidden = false;
           done.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!form.reportValidity()) return;
+
+        // 未接続時はプレビュー（完了表示のみ）
+        if (!FORM_ENDPOINT) { showDone(); return; }
+
+        var emailEl = form.querySelector('input[name="email"]');
+        var nameEl = form.querySelector('input[name="name"]');
+        var submitBtn = form.querySelector('.coupon-submit');
+        var body = new URLSearchParams({
+          email: emailEl ? emailEl.value.trim() : '',
+          name: nameEl ? nameEl.value.trim() : '',
+          source: 'lp-2026-summer-visitor'
+        });
+
+        if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = '送信中…'; }
+
+        // GASウェブアプリはCORSレスポンスを返さないため no-cors で fire-and-forget。
+        // URLSearchParams（application/x-www-form-urlencoded）はプリフライトが発生せず、
+        // GAS側で e.parameter として受け取れる。
+        fetch(FORM_ENDPOINT, { method: 'POST', mode: 'no-cors', body: body })
+          .then(function () { showDone(); })
+          .catch(function () {
+            if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '300円クーポンを受け取る'; }
+            alert('送信に失敗しました。通信環境をご確認のうえ、もう一度お試しください。');
+          });
       });
     })();
 
