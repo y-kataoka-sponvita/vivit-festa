@@ -57,16 +57,25 @@
       text-align: center;
       margin-bottom: 20px;
     }
-    .site-title .brand {
-      font-weight: 900;
-      letter-spacing: 0.04em;
-      font-size: 22px;
-      color: var(--color-primary);
+    .logo-band {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      padding: 12px 26px;
+      border-radius: var(--radius-pill);
+      background:
+        radial-gradient(80% 120% at 50% 0%, rgba(212, 62, 33, 0.35) 0%, transparent 60%),
+        linear-gradient(135deg, #2a1549 0%, #3E206D 60%, #5a2e90 100%);
+      box-shadow: 0 10px 24px rgba(62, 32, 109, 0.22);
     }
-    .site-title .brand .accent { color: var(--color-accent); }
+    .logo-band .logo-img {
+      height: 28px;
+      width: auto;
+      display: block;
+    }
     .site-title .sub {
       display: block;
-      margin-top: 2px;
+      margin-top: 8px;
       font-size: 11px;
       letter-spacing: 0.22em;
       color: var(--color-muted);
@@ -367,7 +376,9 @@
 <body>
   <div class="wrap">
     <div class="site-title">
-      <span class="brand">V<span class="accent">i</span>vit Festa</span>
+      <span class="logo-band">
+        <img src="img/VivitFesta_logo.svg" alt="Vivitフェスタ" class="logo-img">
+      </span>
       <span class="sub">Coupon</span>
     </div>
 
