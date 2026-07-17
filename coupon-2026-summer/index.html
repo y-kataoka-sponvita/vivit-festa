@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Vivitフェスタ クーポン</title>
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="Vivitフェスタ 来場者向けクーポン">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-primary: #3E206D;
+      --color-primary-dark: #2a1549;
+      --color-accent: #d43e21;
+      --color-accent-dark: #a82e16;
+      --color-cream: #e3dcc0;
+      --color-ink: #0d1b2a;
+      --color-ink-soft: #4a5a6a;
+      --color-muted: #8896a5;
+      --color-line: #e3dcc0;
+      --color-surface: #ffffff;
+      --color-surface-tinted: #f3ecd6;
+      --radius-md: 14px;
+      --radius-lg: 24px;
+      --radius-pill: 999px;
+      --font-jp: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      font-family: var(--font-jp);
+      color: var(--color-ink);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      background:
+        radial-gradient(70% 40% at 50% 0%, rgba(212, 62, 33, 0.10) 0%, transparent 60%),
+        linear-gradient(180deg, var(--color-surface-tinted) 0%, #fbf7ec 100%);
+      min-height: 100vh;
+      min-height: 100dvh;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 480px;
+      margin-inline: auto;
+      padding: 24px 16px calc(32px + env(safe-area-inset-bottom));
+    }
+
+    /* ===== Header ===== */
+    .site-title {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .site-title .brand {
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      font-size: 22px;
+      color: var(--color-primary);
+    }
+    .site-title .brand .accent { color: var(--color-accent); }
+    .site-title .sub {
+      display: block;
+      margin-top: 2px;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      color: var(--color-muted);
+      text-transform: uppercase;
+    }
+
+    /* ===== Screen switching ===== */
+    .screen { display: none; }
+    .screen.is-active { display: block; }
+
+    /* ===== Coupon ticket card ===== */
+    .ticket {
+      position: relative;
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 18px 44px rgba(62, 32, 109, 0.18);
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .ticket-top {
+      position: relative;
+      padding: 30px 24px 26px;
+      text-align: center;
+      background:
+        radial-gradient(60% 80% at 50% 0%, rgba(212, 62, 33, 0.10), transparent 70%),
+        linear-gradient(180deg, #ffffff 0%, #fffdf7 100%);
+    }
+    .ticket-brand {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--color-primary);
+      margin: 0 0 6px;
+    }
+    .ticket-amount {
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: 0.01em;
+      color: var(--color-accent);
+      margin: 10px 0 4px;
+      font-size: clamp(56px, 20vw, 84px);
+    }
+    .ticket-amount .yen {
+      font-size: 0.42em;
+      font-weight: 800;
+      margin-left: 4px;
+      color: var(--color-accent-dark);
+      vertical-align: 0.12em;
+    }
+    .ticket-amount.is-skeleton {
+      color: transparent;
+      background: linear-gradient(90deg, #eee 25%, #f6f6f6 37%, #eee 63%);
+      background-size: 400% 100%;
+      border-radius: 12px;
+      animation: shimmer 1.4s ease infinite;
+      min-height: 84px;
+    }
+    @keyframes shimmer { 0% { background-position: 100% 0; } 100% { background-position: -100% 0; } }
+
+    /* Perforation divider with side notches */
+    .ticket-divider {
+      position: relative;
+      height: 0;
+      border-top: 2px dashed var(--color-line);
+      margin: 0 18px;
+    }
+    .ticket-divider::before,
+    .ticket-divider::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background:
+        radial-gradient(70% 40% at 50% 0%, rgba(212, 62, 33, 0.10) 0%, transparent 60%),
+        var(--color-surface-tinted);
+      transform: translateY(-50%);
+    }
+    .ticket-divider::before { left: -31px; }
+    .ticket-divider::after { right: -31px; }
+
+    .ticket-bottom {
+      padding: 16px 24px 22px;
+      text-align: center;
+      background: linear-gradient(180deg, #fffdf7 0%, #ffffff 100%);
+    }
+    .ticket-terms {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 6px 10px;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+    .ticket-terms .chip {
+      background: var(--color-surface-tinted);
+      border-radius: var(--radius-pill);
+      padding: 4px 14px;
+    }
+
+    /* Used stamp overlay */
+    .ticket.is-used { filter: grayscale(0.85); }
+    .ticket.is-used .ticket-amount { color: var(--color-muted); }
+    .used-stamp {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      display: grid;
+      place-items: center;
+      pointer-events: none;
+    }
+    .used-stamp span {
+      transform: rotate(-14deg);
+      border: 4px solid var(--color-accent);
+      color: var(--color-accent);
+      font-weight: 900;
+      font-size: 34px;
+      letter-spacing: 0.1em;
+      padding: 6px 22px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.72);
+      box-shadow: 0 4px 14px rgba(168, 46, 22, 0.25);
+    }
+
+    /* ===== Guidance / status ===== */
+    .guide {
+      margin: 18px 2px 0;
+      font-size: 14.5px;
+      font-weight: 700;
+      text-align: center;
+      color: var(--color-ink);
+    }
+    .status {
+      margin: 12px 0 0;
+      min-height: 1px;
+    }
+    .status .msg {
+      display: block;
+      padding: 12px 16px;
+      border-radius: var(--radius-md);
+      font-size: 13.5px;
+      font-weight: 700;
+      line-height: 1.6;
+      text-align: center;
+    }
+    .status .msg.info { background: rgba(62, 32, 109, 0.08); color: var(--color-primary); }
+    .status .msg.error { background: rgba(212, 62, 33, 0.10); color: var(--color-accent-dark); border: 1px solid rgba(212, 62, 33, 0.35); }
+
+    /* ===== Used info ===== */
+    .used-info {
+      margin: 18px 0 0;
+      padding: 18px 20px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-md);
+      text-align: center;
+    }
+    .used-info .done {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--color-primary);
+      margin: 0 0 10px;
+    }
+    .used-info dl { margin: 0; display: grid; gap: 6px; }
+    .used-info dl div { display: flex; justify-content: center; gap: 8px; font-size: 13.5px; }
+    .used-info dt { color: var(--color-muted); font-weight: 700; }
+    .used-info dd { margin: 0; color: var(--color-ink); font-weight: 700; }
+
+    /* ===== Controls ===== */
+    .controls { margin-top: 22px; }
+    .field-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--color-ink);
+      margin-bottom: 8px;
+    }
+    .shop-select {
+      width: 100%;
+      min-height: 52px;
+      font-family: inherit;
+      font-size: 16px;
+      color: var(--color-ink);
+      padding: 12px 40px 12px 16px;
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-md);
+      background-color: #fff;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%233E206D' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .shop-select:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(62, 32, 109, 0.12); }
+    .shop-select:disabled { background-color: #f4f4f4; color: var(--color-muted); }
+
+    .use-btn {
+      width: 100%;
+      min-height: 56px;
+      margin-top: 16px;
+      font-family: inherit;
+      font-size: 17px;
+      font-weight: 800;
+      color: #fff;
+      border: 0;
+      border-radius: var(--radius-pill);
+      background: var(--color-accent);
+      box-shadow: 0 12px 26px rgba(212, 62, 33, 0.34);
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.1s ease, opacity 0.2s ease;
+    }
+    .use-btn:not(:disabled):active { transform: translateY(1px); }
+    .use-btn:disabled {
+      background: var(--color-muted);
+      box-shadow: none;
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    /* ===== Notes ===== */
+    .notes {
+      margin: 22px 0 0;
+      padding: 16px 18px;
+      background: var(--color-surface-tinted);
+      border-radius: var(--radius-md);
+      list-style: none;
+    }
+    .notes li {
+      position: relative;
+      padding-left: 16px;
+      font-size: 12.5px;
+      line-height: 1.8;
+      color: var(--color-ink-soft);
+    }
+    .notes li::before {
+      content: "";
+      position: absolute;
+      left: 2px;
+      top: 0.75em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--color-primary);
+    }
+
+    /* ===== Message screen (loading / errors) ===== */
+    .message-card {
+      margin-top: 8px;
+      padding: 44px 24px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 12px 30px rgba(62, 32, 109, 0.10);
+      text-align: center;
+    }
+    .message-card .icon { font-size: 40px; line-height: 1; margin-bottom: 12px; }
+    .message-card .title {
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--color-ink);
+      margin: 0 0 10px;
+    }
+    .message-card .text {
+      font-size: 14px;
+      color: var(--color-ink-soft);
+      margin: 0;
+    }
+    .spinner {
+      width: 34px;
+      height: 34px;
+      margin: 0 auto 16px;
+      border: 3px solid var(--color-line);
+      border-top-color: var(--color-primary);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .reload-btn {
+      margin-top: 22px;
+      min-height: 48px;
+      padding: 0 28px;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--color-primary);
+      background: transparent;
+      border: 1px solid var(--color-primary);
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+    }
+    .reload-btn:active { background: rgba(62, 32, 109, 0.06); }
+
+    .footer { margin-top: 28px; text-align: center; font-size: 11px; color: var(--color-muted); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="site-title">
+      <span class="brand">V<span class="accent">i</span>vit Festa</span>
+      <span class="sub">Coupon</span>
+    </div>
+
+    <!-- ============ 読み込み中 ============ -->
+    <section class="screen" id="screen-loading" aria-hidden="true">
+      <div class="message-card">
+        <div class="spinner" role="status" aria-label="読み込み中"></div>
+        <p class="title">クーポン情報を確認しています…</p>
+      </div>
+    </section>
+
+    <!-- ============ クーポン（有効／使用中／使用済み） ============ -->
+    <section class="screen" id="screen-coupon" aria-hidden="true">
+      <div class="ticket" id="ticket">
+        <div class="ticket-top">
+          <p class="ticket-brand">Vivitフェスタ クーポン</p>
+          <p class="ticket-amount is-skeleton" id="amount"></p>
+        </div>
+        <div class="ticket-divider" aria-hidden="true"></div>
+        <div class="ticket-bottom">
+          <span class="ticket-terms">
+            <span class="chip">当日限り</span>
+            <span class="chip">1回限り使用可能</span>
+          </span>
+        </div>
+        <div class="used-stamp" id="usedStamp" hidden><span>使用済み</span></div>
+      </div>
+
+      <p class="guide" id="guide" aria-live="polite"></p>
+      <div class="status" id="status" aria-live="polite"></div>
+
+      <!-- 使用済み情報 -->
+      <div class="used-info" id="usedInfo" hidden>
+        <p class="done">クーポンを使用しました</p>
+        <dl>
+          <div id="usedShopRow" hidden><dt>使用店舗</dt><dd id="usedShop"></dd></div>
+          <div id="usedAtRow" hidden><dt>使用日時</dt><dd id="usedAt"></dd></div>
+        </dl>
+      </div>
+
+      <!-- 操作エリア（未使用時のみ） -->
+      <div class="controls" id="controls" hidden>
+        <label class="field-label" for="shopSelect">使用するお店</label>
+        <select class="shop-select" id="shopSelect" aria-label="使用するお店">
+          <option value="">お店を選択してください</option>
+        </select>
+        <button class="use-btn" id="useBtn" type="button" disabled>このクーポンを使う</button>
+      </div>
+
+      <ul class="notes" id="notes" hidden>
+        <li>店舗スタッフに画面を見せてから「このクーポンを使う」を押してください。</li>
+        <li>使用後の取り消しはできません。</li>
+        <li>クーポンは1回限り使用できます。</li>
+        <li>通信環境の良い場所で操作してください。</li>
+      </ul>
+    </section>
+
+    <!-- ============ メッセージ（IDなし／無効ID／通信エラー） ============ -->
+    <section class="screen" id="screen-message" aria-hidden="true">
+      <div class="message-card">
+        <div class="icon" id="msgIcon" aria-hidden="true">⚠️</div>
+        <p class="title" id="msgTitle"></p>
+        <p class="text" id="msgText"></p>
+        <button class="reload-btn" id="reloadBtn" type="button" hidden>再読み込み</button>
+      </div>
+    </section>
+
+    <p class="footer">© 2026 Vivitフェスタ / 株式会社Sunny Spot</p>
+  </div>
+
+  <script>
+    'use strict';
+
+    // ===== 設定 =====
+    // GAS ウェブアプリの URL をここに設定する（gas/README.md 参照）。
+    // 例: 'https://script.google.com/macros/s/XXXXXXXX/exec'
+    var API_URL = '';
+
+    // ===== 要素参照 =====
+    var el = {
+      screens: {
+        loading: document.getElementById('screen-loading'),
+        coupon: document.getElementById('screen-coupon'),
+        message: document.getElementById('screen-message')
+      },
+      ticket: document.getElementById('ticket'),
+      amount: document.getElementById('amount'),
+      usedStamp: document.getElementById('usedStamp'),
+      guide: document.getElementById('guide'),
+      status: document.getElementById('status'),
+      usedInfo: document.getElementById('usedInfo'),
+      usedShopRow: document.getElementById('usedShopRow'),
+      usedShop: document.getElementById('usedShop'),
+      usedAtRow: document.getElementById('usedAtRow'),
+      usedAt: document.getElementById('usedAt'),
+      controls: document.getElementById('controls'),
+      shopSelect: document.getElementById('shopSelect'),
+      useBtn: document.getElementById('useBtn'),
+      notes: document.getElementById('notes'),
+      msgIcon: document.getElementById('msgIcon'),
+      msgTitle: document.getElementById('msgTitle'),
+      msgText: document.getElementById('msgText'),
+      reloadBtn: document.getElementById('reloadBtn')
+    };
+
+    var couponId = null;
+    var isSubmitting = false;
+
+    // ===== 画面切り替え =====
+    function showScreen(name) {
+      Object.keys(el.screens).forEach(function (key) {
+        var active = key === name;
+        el.screens[key].classList.toggle('is-active', active);
+        el.screens[key].setAttribute('aria-hidden', active ? 'false' : 'true');
+      });
+    }
+
+    function showMessage(icon, title, text, allowReload) {
+      el.msgIcon.textContent = icon;
+      el.msgTitle.textContent = title;
+      el.msgText.textContent = text || '';
+      el.reloadBtn.hidden = !allowReload;
+      showScreen('message');
+    }
+
+    function setStatus(text, type) {
+      if (!text) { el.status.innerHTML = ''; return; }
+      var span = document.createElement('span');
+      span.className = 'msg ' + (type || 'info');
+      span.textContent = text;
+      el.status.innerHTML = '';
+      el.status.appendChild(span);
+    }
+
+    // ===== 表示ヘルパー =====
+    function renderAmount(amount) {
+      el.amount.classList.remove('is-skeleton');
+      el.amount.textContent = '';
+      var yen = document.createElement('span');
+      yen.className = 'yen';
+      yen.textContent = '円';
+      el.amount.appendChild(document.createTextNode(String(amount)));
+      el.amount.appendChild(yen);
+    }
+
+    function formatDateTime(iso) {
+      if (!iso) return '';
+      var d = new Date(iso);
+      if (isNaN(d.getTime())) return String(iso);
+      var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+      return d.getFullYear() + '年' + (d.getMonth() + 1) + '月' + d.getDate() + '日 ' +
+             pad(d.getHours()) + ':' + pad(d.getMinutes());
+    }
+
+    function populateShops(shops) {
+      // 既存の選択肢（先頭のプレースホルダ以外）をクリア
+      while (el.shopSelect.options.length > 1) { el.shopSelect.remove(1); }
+      (shops || []).forEach(function (shop) {
+        if (!shop || !shop.shopId) return;
+        var opt = document.createElement('option');
+        opt.value = shop.shopId;
+        opt.textContent = shop.shopName || shop.shopId; // XSS防止のため textContent
+        el.shopSelect.appendChild(opt);
+      });
+    }
+
+    function refreshUseButton() {
+      var ok = !!el.shopSelect.value && !isSubmitting;
+      el.useBtn.disabled = !ok;
+    }
+
+    // ===== クーポン状態の描画 =====
+    function renderCoupon(coupon, shops) {
+      renderAmount(coupon.amount);
+
+      if (coupon.used) {
+        // 使用済み表示
+        el.ticket.classList.add('is-used');
+        el.usedStamp.hidden = false;
+        el.controls.hidden = true;
+        el.notes.hidden = true;
+        el.guide.textContent = 'このクーポンは使用済みです。';
+        setStatus('', null);
+
+        el.usedInfo.hidden = false;
+        if (coupon.shopName) {
+          el.usedShop.textContent = coupon.shopName;
+          el.usedShopRow.hidden = false;
+        }
+        if (coupon.usedAt) {
+          el.usedAt.textContent = formatDateTime(coupon.usedAt);
+          el.usedAtRow.hidden = false;
+        }
+      } else {
+        // 有効・未使用
+        el.ticket.classList.remove('is-used');
+        el.usedStamp.hidden = true;
+        el.usedInfo.hidden = true;
+        el.controls.hidden = false;
+        el.notes.hidden = false;
+        el.guide.textContent = 'お店を選んで、店舗スタッフに画面を見せてからご利用ください。';
+        populateShops(shops);
+        refreshUseButton();
+      }
+
+      showScreen('coupon');
+    }
+
+    // ===== API 呼び出し =====
+    function fetchCoupon() {
+      showScreen('loading');
+      var url = API_URL + (API_URL.indexOf('?') >= 0 ? '&' : '?') +
+                'action=getCoupon&id=' + encodeURIComponent(couponId);
+
+      fetch(url, { method: 'GET' })
+        .then(function (res) { return res.text(); })
+        .then(function (text) {
+          var data = safeParse(text);
+          if (!data) { throw new Error('bad_json'); }
+
+          if (data.success) {
+            renderCoupon(data.coupon, data.shops);
+            return;
+          }
+          // 失敗レスポンス
+          var code = data.error && data.error.code;
+          if (code === 'COUPON_NOT_FOUND') {
+            showMessage('🔍', 'クーポンが見つかりません', 'URLが正しいかご確認ください。', false);
+          } else if (code === 'INVALID_REQUEST') {
+            showMessage('⚠️', 'クーポンIDが指定されていません', '', false);
+          } else if (code === 'INVALID_COUPON_DATA') {
+            showMessage('⚠️', 'クーポン情報が正しくありません', 'お手数ですが運営までお問い合わせください。', false);
+          } else {
+            showMessage('⚠️', 'クーポンを表示できません', (data.error && data.error.message) || '', true);
+          }
+        })
+        .catch(function () {
+          showMessage('📡', '通信に失敗しました', '時間を置いて、もう一度お試しください。', true);
+        });
+    }
+
+    function useCoupon() {
+      if (isSubmitting) return;
+      var shopId = el.shopSelect.value;
+      if (!shopId) return;
+
+      var shopName = el.shopSelect.options[el.shopSelect.selectedIndex].textContent;
+      var confirmed = window.confirm(
+        '「' + shopName + '」でこのクーポンを使用しますか？\n\n' +
+        '店舗スタッフに画面を見せた状態で操作してください。\n使用後は取り消せません。'
+      );
+      if (!confirmed) return;
+
+      // 送信中ロック（連打・二重送信防止）
+      isSubmitting = true;
+      el.useBtn.disabled = true;
+      el.shopSelect.disabled = true;
+      el.useBtn.textContent = '使用処理中…';
+      setStatus('使用処理中です。画面を閉じないでください…', 'info');
+
+      var body = new URLSearchParams({
+        action: 'useCoupon',
+        id: couponId,
+        shopId: shopId
+      });
+
+      fetch(API_URL, { method: 'POST', body: body })
+        .then(function (res) { return res.text(); })
+        .then(function (text) {
+          var data = safeParse(text);
+          if (!data) { throw new Error('bad_json'); }
+
+          if (data.success) {
+            // 使用成功
+            renderCoupon(data.coupon, []);
+            return;
+          }
+
+          var code = data.error && data.error.code;
+          if (code === 'COUPON_ALREADY_USED') {
+            // すでに使用済み → 使用済み画面へ
+            renderCoupon(data.coupon || { amount: currentAmount(), used: true }, []);
+            return;
+          }
+
+          // それ以外のエラー：操作を戻して再試行可能にする
+          restoreControls();
+          if (code === 'SHOP_NOT_FOUND' || code === 'SHOP_INACTIVE') {
+            setStatus('選択されたお店は現在ご利用いただけません。別のお店をお選びください。', 'error');
+          } else {
+            setStatus((data.error && data.error.message) || 'クーポンを使用できませんでした。', 'error');
+          }
+        })
+        .catch(function () {
+          restoreControls();
+          setStatus('通信に失敗しました。時間を置いて、もう一度お試しください。', 'error');
+        });
+    }
+
+    function restoreControls() {
+      isSubmitting = false;
+      el.shopSelect.disabled = false;
+      el.useBtn.textContent = 'このクーポンを使う';
+      refreshUseButton();
+    }
+
+    function currentAmount() {
+      var t = (el.amount.textContent || '').replace(/[^0-9]/g, '');
+      return t ? parseInt(t, 10) : null;
+    }
+
+    function safeParse(text) {
+      try { return JSON.parse(text); } catch (e) { return null; }
+    }
+
+    // ===== 初期化 =====
+    function init() {
+      couponId = new URLSearchParams(window.location.search).get('id');
+
+      if (!couponId) {
+        showMessage('⚠️', 'クーポンIDが指定されていません', 'クーポンのURLからアクセスしてください。', false);
+        return;
+      }
+      if (!API_URL) {
+        showMessage('🛠️', 'ただいま準備中です', '時間を置いて、もう一度お試しください。', true);
+        return;
+      }
+
+      el.shopSelect.addEventListener('change', refreshUseButton);
+      el.useBtn.addEventListener('click', useCoupon);
+      el.reloadBtn.addEventListener('click', function () { window.location.reload(); });
+
+      fetchCoupon();
+    }
+
+    init();
+  </script>
+</body>
+</html>
