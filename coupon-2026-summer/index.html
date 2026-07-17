@@ -551,8 +551,12 @@
     }
 
     // ===== クーポン状態の描画 =====
-    function renderCoupon(coupon, shops) {
+    function renderCoupon(coupon, shops, availability) {
       renderAmount(coupon.amount);
+      // 状態ごとに一旦リセット
+      el.usedInfo.hidden = true;
+      el.usedShopRow.hidden = true;
+      el.usedAtRow.hidden = true;
 
       if (coupon.used) {
         // 使用済み表示
@@ -572,11 +576,23 @@
           el.usedAt.textContent = formatDateTime(coupon.usedAt);
           el.usedAtRow.hidden = false;
         }
+      } else if (availability && availability.available === false) {
+        // 利用可能期間外（未使用だが今は使えない）
+        el.ticket.classList.remove('is-used');
+        el.usedStamp.hidden = true;
+        el.controls.hidden = true;
+        el.notes.hidden = true;
+        if (availability.reason === 'after_period') {
+          el.guide.textContent = 'クーポンのご利用期間は終了しました。';
+          setStatus('ご利用期間：' + formatWindow(availability) + ' でした。', 'info');
+        } else {
+          el.guide.textContent = 'このクーポンは開催当日にご利用いただけます。';
+          setStatus('ご利用可能：' + formatWindow(availability), 'info');
+        }
       } else {
         // 有効・未使用
         el.ticket.classList.remove('is-used');
         el.usedStamp.hidden = true;
-        el.usedInfo.hidden = true;
         el.controls.hidden = false;
         el.notes.hidden = false;
         el.guide.textContent = 'お店を選んで、店舗スタッフに画面を見せてからご利用ください。';
@@ -585,6 +601,11 @@
       }
 
       showScreen('coupon');
+    }
+
+    function formatWindow(availability) {
+      if (!availability || !availability.from || !availability.until) return '';
+      return formatDateTime(availability.from) + ' 〜 ' + formatDateTime(availability.until);
     }
 
     // ===== API 呼び出し =====
@@ -600,7 +621,7 @@
           if (!data) { throw new Error('bad_json'); }
 
           if (data.success) {
-            renderCoupon(data.coupon, data.shops);
+            renderCoupon(data.coupon, data.shops, data.availability);
             return;
           }
           // 失敗レスポンス
@@ -653,14 +674,19 @@
 
           if (data.success) {
             // 使用成功
-            renderCoupon(data.coupon, []);
+            renderCoupon(data.coupon, [], null);
             return;
           }
 
           var code = data.error && data.error.code;
           if (code === 'COUPON_ALREADY_USED') {
             // すでに使用済み → 使用済み画面へ
-            renderCoupon(data.coupon || { amount: currentAmount(), used: true }, []);
+            renderCoupon(data.coupon || { amount: currentAmount(), used: true }, [], null);
+            return;
+          }
+          if (code === 'OUTSIDE_PERIOD') {
+            // 期間外（読み込み後に時間切れ等）：期間外画面へ
+            renderCoupon({ amount: currentAmount(), used: false }, [], data.availability || { available: false, reason: 'after_period' });
             return;
           }
 

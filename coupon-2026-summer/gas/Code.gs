@@ -15,7 +15,15 @@ var CONFIG = {
   SPREADSHEET_ID: '',
   COUPONS_SHEET: 'coupons',
   SHOPS_SHEET: 'shops',
-  TIMEZONE: 'Asia/Tokyo'
+  TIMEZONE: 'Asia/Tokyo',
+
+  // ===== 利用可能期間 =====
+  // この時間帯（JST）のみ使用可。開場11:30〜閉場17:00に前後30分バッファ。
+  // 変更したい場合はこの2つを書き換える（ISO 8601・+09:00 を付ける）。
+  USABLE_FROM: '2026-08-01T11:00:00+09:00',
+  USABLE_UNTIL: '2026-08-01T17:30:00+09:00',
+  // このプレフィックスで始まるIDは期間チェックを無視して常に使用可（テスト用）。
+  DEMO_PREFIX: 'demo'
 };
 
 // ===== エンドポイント =====
@@ -66,7 +74,8 @@ function handleGetCoupon_(id) {
   return jsonResponse_({
     success: true,
     coupon: coupon,
-    shops: shops
+    shops: shops,
+    availability: couponAvailability_(id)
   });
 }
 
@@ -102,6 +111,19 @@ function handleUseCoupon_(id, shopId) {
       });
     }
 
+    // 利用可能期間の判定（demoは常に可）。クライアント時刻は信用せずサーバー側で判定。
+    var avail = couponAvailability_(id);
+    if (!avail.available) {
+      var outMsg = (avail.reason === 'before_period')
+        ? 'このクーポンはまだご利用いただけません'
+        : 'クーポンのご利用期間は終了しました';
+      return jsonResponse_({
+        success: false,
+        error: { code: 'OUTSIDE_PERIOD', message: outMsg },
+        availability: avail
+      });
+    }
+
     // 店舗を検証（存在・active）
     var shop = findShop_(shopId);
     if (!shop) {
@@ -131,6 +153,31 @@ function handleUseCoupon_(id, shopId) {
   } finally {
     lock.releaseLock();
   }
+}
+
+// ===== 利用可能期間 =====
+// demoで始まるIDは常に利用可。それ以外は CONFIG の期間内のみ利用可。
+// { available, reason: 'ok'|'before_period'|'after_period', from, until } を返す。
+function couponAvailability_(id) {
+  if (isDemoId_(id)) {
+    return { available: true, reason: 'ok', from: null, until: null };
+  }
+  var from = new Date(CONFIG.USABLE_FROM).getTime();
+  var until = new Date(CONFIG.USABLE_UNTIL).getTime();
+  var now = Date.now();
+  var reason = 'ok';
+  if (now < from) reason = 'before_period';
+  else if (now > until) reason = 'after_period';
+  return {
+    available: reason === 'ok',
+    reason: reason,
+    from: CONFIG.USABLE_FROM,
+    until: CONFIG.USABLE_UNTIL
+  };
+}
+
+function isDemoId_(id) {
+  return String(id || '').toLowerCase().indexOf(String(CONFIG.DEMO_PREFIX).toLowerCase()) === 0;
 }
 
 // ===== スプレッドシート アクセス =====

@@ -94,12 +94,21 @@ var API_URL = 'https://script.google.com/macros/s/XXXX/exec';
 | 取得 | `GET  ?action=getCoupon&id=..` | `{success:true, coupon:{...}, shops:[...]}` |
 | 使用 | `POST action=useCoupon&id=..&shopId=..` | `{success:true, coupon:{...}}` |
 
-エラーコード：`INVALID_REQUEST` / `COUPON_NOT_FOUND` / `COUPON_ALREADY_USED` / `SHOP_NOT_FOUND` / `SHOP_INACTIVE` / `INVALID_COUPON_DATA` / `INTERNAL_ERROR`
+エラーコード：`INVALID_REQUEST` / `COUPON_NOT_FOUND` / `COUPON_ALREADY_USED` / `OUTSIDE_PERIOD` / `SHOP_NOT_FOUND` / `SHOP_INACTIVE` / `INVALID_COUPON_DATA` / `INTERNAL_ERROR`
+
+`getCoupon` は `availability: { available, reason, from, until }` も返す（`reason`: `ok` / `before_period` / `after_period`）。
+
+### 利用可能期間（当日限定）
+- `Code.gs` の `CONFIG.USABLE_FROM` / `USABLE_UNTIL`（JST）で使用できる時間帯を制御。
+  既定は **2026-08-01 11:00〜17:30**（開場11:30・閉場17:00に前後30分バッファ）。
+- **判定はサーバー側**（クライアント時刻は信用しない）。期間外の使用は `OUTSIDE_PERIOD` で拒否。
+- **`CONFIG.DEMO_PREFIX`（既定 `demo`）で始まるIDは期間チェックを無視**して常に使用可（テスト用）。
+- 変更したい場合は `USABLE_FROM` / `USABLE_UNTIL` の2行を書き換えて再デプロイ。
 
 ### 安全設計（サーバー側で担保）
 - 金額は `coupons`、店舗名は `shops` から取得（フロントの申告値は信用しない）。
 - 使用は `LockService` で排他制御 → ロック後に使用状態を再確認してから更新（**二重使用・連打・同時アクセスを防止**）。
-- 使用済みクーポンへの再POSTはサーバー側で拒否。
+- 使用済み・期間外クーポンへの再POSTはサーバー側で拒否。
 - エラー時にスプレッドシートIDや内部情報は返さない。
 
 ---
