@@ -26,7 +26,7 @@
         <a href="#info">開催情報</a>
         <a href="#faq">FAQ</a>
       </nav>
-      <a href="#register" class="btn btn-primary btn-sm" data-coupon-scroll>クーポンを申し込む</a>
+      <a href="#register" class="btn btn-primary btn-sm" data-coupon-scroll>クーポンを受け取る</a>
     </div>
   </header>
 
@@ -35,22 +35,24 @@
     <section class="hero hero-visitor">
       <div class="hero-bg" aria-hidden="true"></div>
       <div class="container hero-inner">
-        <p class="eyebrow">VIVIT FESTA / 2026 SUMMER</p>
         <h1 class="hero-title">
-          すべてのハンドメイド好きへ捧ぐ<br class="sp-only">
+          すべてのハンドメイド好きへ<br>
           <span class="text-gradient">心がビビッと動く夏のマルシェ</span>
         </h1>
-        <p class="hero-lead">
-          アクセサリーや雑貨、おいしいもの、ワークショップなど、<br class="sp-only">
-          個性豊かなつくり手が原宿に集まります。8/1（土）開催。
-        </p>
 
         <!-- 登録フォーム：ファーストビュー内に配置（ページ内で唯一のフォーム） -->
         <div id="register" class="hero-register">
-          <p class="hero-register-kicker">先着<span class="hero-register-count">100</span>名<span class="hero-register-limit">限定</span></p>
-          <p class="hero-register-title">当日 会場で使える
-            <span class="hero-register-amount"><span class="yen">¥</span>300<span class="unit">クーポン</span></span>
-          </p>
+          <p class="hero-register-title">当日 会場で使える</p>
+          <div class="hero-register-main">
+            <p class="hero-register-amount"><span class="yen">¥</span>300<span class="unit">クーポン</span></p>
+            <!-- 丸ラベル：デザイナー支給の画像が届いたら、この span を
+                 <img class="hero-count-badge" src="..." alt="先着100名限定"> に差し替え -->
+            <span class="hero-count-badge" role="img" aria-label="先着100名限定">
+              <span class="hero-count-badge-top">先着</span>
+              <span class="hero-count-badge-num">100</span>
+              <span class="hero-count-badge-bottom">名限定</span>
+            </span>
+          </div>
           <p class="hero-register-free">登録無料・おひとり様1回まで</p>
 
           <form class="coupon-form coupon-form-hero" data-coupon-form novalidate>
@@ -59,7 +61,7 @@
               <input type="email" id="cf-email" name="email" inputmode="email" autocomplete="email"
                      placeholder="you@example.com" required>
             </div>
-            <button type="submit" class="btn btn-primary btn-lg coupon-submit">300円クーポンを申し込む</button>
+            <button type="submit" class="btn btn-primary btn-lg coupon-submit">300円クーポンを受け取る</button>
             <p class="coupon-error" data-coupon-error hidden role="alert">
               登録に失敗いたしました。お手数ですが、時間をおいて<br class="sp-only">もう一度お試しください。
             </p>
@@ -491,7 +493,7 @@
           <p class="bottom-cta-badge">先着100名限定</p>
           <p class="bottom-cta-title">当日使える<span class="bottom-cta-amount">300円</span>クーポン</p>
           <p class="bottom-cta-note">開催の約1週間前に、ご登録のメールアドレスへお届けします。</p>
-          <a href="#register" class="btn btn-primary btn-lg bottom-cta-btn" data-coupon-scroll>300円クーポンを申し込む</a>
+          <a href="#register" class="btn btn-primary btn-lg bottom-cta-btn" data-coupon-scroll>300円クーポンを受け取る</a>
         </div>
       </div>
     </section>
@@ -512,7 +514,7 @@
   <!-- ========== スマホ下部固定CTA ========== -->
   <a href="#register" class="sticky-cta" data-sticky-cta data-coupon-scroll>
     <span class="sticky-cta-label">先着100名限定</span>
-    300円クーポンを申し込む
+    300円クーポンを受け取る
   </a>
 
   <script>
@@ -522,7 +524,7 @@
     // デプロイ手順は gas/README.md を参照。
     var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbx9m5eKvea0Awl3Kx-pr5j3C4gvwDf82i7LSnvN7bYhbMmTX1Ib1a6PTn7c350piTsBKA/exec';
     (function () {
-      var SUBMIT_LABEL = '300円クーポンを申し込む';
+      var SUBMIT_LABEL = '300円クーポンを受け取る';
       var TIMEOUT_MS = 15000; // GASのコールドスタートを考慮した猶予
 
       var form = document.querySelector('[data-coupon-form]');

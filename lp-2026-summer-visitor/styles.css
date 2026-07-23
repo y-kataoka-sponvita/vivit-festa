@@ -1292,7 +1292,8 @@ p { margin: 0; }
 html, body { overflow-x: clip; }
 
 /* ---- Hero: photo background (scent一致：リール流入の実写に合わせる) ---- */
-.hero-visitor { padding-block: clamp(56px, 8vw, 96px); }
+/* eyebrow（英字）を削除したぶん、上部を詰めてコピーを上げる */
+.hero-visitor { padding-block: clamp(24px, 4vw, 44px) clamp(56px, 8vw, 96px); }
 .hero-visitor .hero-bg {
   background:
     linear-gradient(180deg, rgba(42, 21, 73, 0.68) 0%, rgba(42, 21, 73, 0.74) 50%, rgba(42, 21, 73, 0.90) 100%),
@@ -1304,9 +1305,9 @@ html, body { overflow-x: clip; }
 .hero-visitor .hero-inner { max-width: 760px; }
 /* FV縦圧縮：スマホ初回表示に ¥300＋CTA を収める */
 .hero-visitor .eyebrow { margin-bottom: 16px; }
-/* メインコピーは控えめにして、下のクーポンカードを主役にする */
+/* メインコピーは控えめにして、下のクーポンカードを主役にする（-2px） */
 .hero-visitor .hero-title {
-  font-size: clamp(24px, 4.6vw, 40px);
+  font-size: clamp(22px, 4.3vw, 38px);
   margin-bottom: 14px;
 }
 .hero-visitor .hero-lead { margin-bottom: 22px; }
@@ -1606,13 +1607,15 @@ html, body { overflow-x: clip; }
 /* ---- ファーストビュー内の登録カード（白カード） ---- */
 .hero-register {
   margin: 22px auto 36px;
-  max-width: 460px;
-  padding: clamp(22px, 4vw, 32px);
+  max-width: none; /* 下の開催情報（hero-meta）と横幅を揃える */
+  padding: clamp(24px, 4vw, 36px);
   background: var(--color-surface);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
   text-align: center;
 }
+/* フォームの入力欄が広がりすぎないよう、中身は程よい幅で中央寄せ */
+.coupon-form-hero { max-width: 440px; margin-inline: auto; width: 100%; }
 /* 先着100名（数字を大きく強調） */
 .hero-register-kicker {
   display: inline-flex;
@@ -1649,17 +1652,44 @@ html, body { overflow-x: clip; }
   color: var(--color-ink);
   letter-spacing: 0.02em;
   line-height: 1.4;
+  margin-bottom: 8px;
+}
+/* ¥300 と 丸ラベルを横並び */
+.hero-register-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
   margin-bottom: 14px;
 }
 .hero-register-amount {
-  display: block;
-  margin-top: 2px;
+  margin: 0;
   font-weight: 900;
   line-height: 1;
   color: var(--color-accent);
-  font-size: clamp(56px, 14vw, 84px);
+  font-size: clamp(48px, 13vw, 72px);
   letter-spacing: 0.01em;
 }
+/* 先着100名限定の丸ラベル（画像差し替え前提のCSS版） */
+.hero-count-badge {
+  flex: 0 0 auto;
+  width: clamp(76px, 21vw, 92px);
+  height: clamp(76px, 21vw, 92px);
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  text-align: center;
+  box-shadow: 0 6px 16px rgba(212, 62, 33, 0.4);
+  transform: rotate(-8deg);
+}
+.hero-count-badge-top { font-size: 11px; font-weight: 800; letter-spacing: 0.08em; }
+.hero-count-badge-num { font-size: clamp(26px, 7vw, 32px); font-weight: 900; margin: 2px 0; }
+.hero-count-badge-bottom { font-size: 12px; font-weight: 800; letter-spacing: 0.06em; }
 .hero-register-free {
   font-size: 12.5px;
   font-weight: 700;
