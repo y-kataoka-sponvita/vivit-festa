@@ -20,36 +20,65 @@
         <img src="img/VivitFesta_logo.svg" alt="Vivitフェスタ" class="logo-img">
       </a>
       <nav class="site-nav" aria-label="グローバルナビゲーション">
-        <a href="#coupon">クーポン</a>
-        <a href="#atmosphere">雰囲気</a>
+        <a href="#register">クーポン</a>
         <a href="#whats">楽しめるもの</a>
+        <a href="#atmosphere">雰囲気</a>
         <a href="#info">開催情報</a>
         <a href="#faq">FAQ</a>
       </nav>
-      <a href="#register" class="btn btn-primary btn-sm">クーポンを受け取る</a>
+      <a href="#register" class="btn btn-primary btn-sm" data-coupon-scroll>クーポンを申し込む</a>
     </div>
   </header>
 
   <main>
-    <!-- ========== 1. ファーストビュー ========== -->
+    <!-- ========== 1. ファーストビュー（メインコピー＋登録フォーム） ========== -->
     <section class="hero hero-visitor">
       <div class="hero-bg" aria-hidden="true"></div>
       <div class="container hero-inner">
         <p class="eyebrow">VIVIT FESTA / 2026 SUMMER</p>
         <h1 class="hero-title">
-          花火咲く縁日で、<br>
-          <span class="text-gradient">心がビビッと動く夏へ。</span>
+          すべてのハンドメイド好きへ捧ぐ<br class="sp-only">
+          <span class="text-gradient">心がビビッと動く夏のマルシェ</span>
         </h1>
         <p class="hero-lead">
-          つくり手の「好き」が並ぶ夏のマルシェ。8/1（土）原宿・北参道で開催。
+          アクセサリーや雑貨、おいしいもの、ワークショップなど、<br class="sp-only">
+          個性豊かなつくり手が原宿に集まります。8/1（土）開催。
         </p>
 
-        <div class="hero-coupon">
-          <p class="hero-coupon-badge">先着100名限定</p>
-          <p class="hero-coupon-lead">当日使える</p>
-          <p class="hero-coupon-amount"><span class="hero-coupon-yen">¥</span>300<span class="hero-coupon-unit">クーポン</span></p>
-          <p class="hero-coupon-note">メール登録で、そのままプレゼント。</p>
-          <a href="#register" class="btn btn-primary btn-lg hero-coupon-btn">300円クーポンを受け取る</a>
+        <!-- 登録フォーム：ファーストビュー内に配置（ページ内で唯一のフォーム） -->
+        <div id="register" class="hero-register">
+          <p class="hero-register-kicker">先着<span class="hero-register-count">100</span>名<span class="hero-register-limit">限定</span></p>
+          <p class="hero-register-title">当日 会場で使える
+            <span class="hero-register-amount"><span class="yen">¥</span>300<span class="unit">クーポン</span></span>
+          </p>
+          <p class="hero-register-free">登録無料・おひとり様1回まで</p>
+
+          <form class="coupon-form coupon-form-hero" data-coupon-form novalidate>
+            <div class="coupon-field">
+              <label for="cf-email">メールアドレス <span class="coupon-req">必須</span></label>
+              <input type="email" id="cf-email" name="email" inputmode="email" autocomplete="email"
+                     placeholder="you@example.com" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg coupon-submit">300円クーポンを申し込む</button>
+            <p class="coupon-error" data-coupon-error hidden role="alert">
+              登録に失敗いたしました。お手数ですが、時間をおいて<br class="sp-only">もう一度お試しください。
+            </p>
+            <p class="coupon-form-note">
+              登録無料・おひとり様1回まで。<br>
+              300円クーポンは、開催の約1週間前にメールでお届けします。<br>
+              先着100名に達し次第、配布終了となります。
+            </p>
+          </form>
+
+          <div class="coupon-done" data-coupon-done hidden>
+            <p class="coupon-done-badge">登録ありがとうございます</p>
+            <p class="coupon-done-title">クーポンは開催の約1週間前にお届けします</p>
+            <p class="coupon-done-text">
+              300円クーポンは、開催の約1週間前に<br class="sp-only">
+              ご登録のメールアドレス宛へお送りします。<br>
+              当日、会場でのお買い物にぜひご利用ください。
+            </p>
+          </div>
         </div>
 
         <dl class="hero-meta">
@@ -73,50 +102,48 @@
       </div>
     </section>
 
-    <!-- ========== 2. クーポン訴求 ========== -->
-    <section id="coupon" class="section section-tinted">
-      <div class="container section-inner section-narrow">
+    <!-- ========== 2. イベント内容の概要（楽しめること） ========== -->
+    <section id="whats" class="section section-tinted">
+      <div class="container section-inner">
         <header class="section-head">
-          <p class="section-eyebrow">COUPON</p>
-          <h2 class="section-title">当日使える300円クーポンを、<br>先着100名にプレゼント</h2>
-          <p class="section-lead">
-            メールアドレスを登録すると、Vivitフェスタ当日に使える300円クーポンをお送りします。<br>
-            気になる作品やお菓子との出会いに、ぜひご利用ください。
-          </p>
+          <p class="section-eyebrow">WHAT'S THERE</p>
+          <h2 class="section-title">Vivitフェスタで楽しめること</h2>
+          <p class="section-lead">つくり手の「好き」が、いろんなかたちで並びます。</p>
         </header>
-        <ul class="coupon-points">
-          <li>
-            <span class="coupon-point-mark">01</span>
-            <span class="coupon-point-text"><strong>先着100名限定</strong><br>定員に達し次第、配布は終了します。</span>
-          </li>
-          <li>
-            <span class="coupon-point-mark">02</span>
-            <span class="coupon-point-text"><strong>おひとり様1回まで</strong><br>ご登録はおひとり1回のご利用です。</span>
-          </li>
-          <li>
-            <span class="coupon-point-mark">03</span>
-            <span class="coupon-point-text"><strong>当日会場で利用可能</strong><br>会場内のお買い物にご利用いただけます。</span>
-          </li>
-          <li>
-            <span class="coupon-point-mark">04</span>
-            <span class="coupon-point-text"><strong>利用方法はメールで案内</strong><br>開催の約1週間前にメールでお送りします。</span>
-          </li>
-        </ul>
-        <div class="coupon-cta">
-          <a href="#register" class="btn btn-primary btn-lg">先着100名のクーポンに登録する</a>
+        <div class="category-grid">
+          <article class="category-card">
+            <p class="category-tag">HANDMADE</p>
+            <h3>ハンドメイド雑貨</h3>
+            <p>一点もののアクセサリーや小物。</p>
+          </article>
+          <article class="category-card">
+            <p class="category-tag">SWEETS</p>
+            <h3>お菓子・スイーツ</h3>
+            <p>夏にぴったりの焼き菓子や甘いもの。</p>
+          </article>
+          <article class="category-card">
+            <p class="category-tag">ART</p>
+            <h3>イラスト・アート</h3>
+            <p>作家さんの世界観に触れる作品。</p>
+          </article>
+          <article class="category-card">
+            <p class="category-tag">WORKSHOP</p>
+            <h3>ワークショップ</h3>
+            <p>その場で楽しめる体験企画。</p>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- ========== 3. 雰囲気紹介 ========== -->
+    <!-- ========== 3. ATMOSPHERE（コンセプトコピー＋雰囲気写真） ========== -->
     <section id="atmosphere" class="section">
       <div class="container section-inner">
         <header class="section-head">
           <p class="section-eyebrow">ATMOSPHERE</p>
-          <h2 class="section-title">夏祭りみたいに歩ける、<br>小さなマルシェ。</h2>
+          <h2 class="section-title">花火咲く縁日で、<br>心がビビッと動く夏へ。</h2>
           <p class="section-lead">
-            ハンドメイド作品、お菓子、イラスト、ワークショップ。<br>
-            つくり手の「好き」が並ぶ、あたたかい空間です。
+            個性豊かなつくり手と、心ときめく作品や体験に出会える一日。<br>
+            見るだけでも楽しく、お気に入りを探しながら夏のマルシェをお楽しみください。
           </p>
         </header>
         <div class="concept-slider" data-slider>
@@ -150,36 +177,228 @@
       </div>
     </section>
 
-    <!-- ========== 4. 会場で楽しめるもの ========== -->
-    <section id="whats" class="section section-tinted">
+    <!-- ========== 4. 楽しめる商品・体験（今回の作品） ========== -->
+    <!--
+      画像は img/works/ の作品写真（横スクロール表示）。
+      カードは正方形に統一し、写真は切らずに全体表示（余白は同じ画像のぼかしで自然に充填）。
+      作品を差し替えるときは、1カード内の product-bg と product-photo の src を
+      同じファイルに差し替え、product-photo の alt を更新する（縦横比は問わない）。
+    -->
+    <section id="products" class="section">
       <div class="container section-inner">
         <header class="section-head">
-          <p class="section-eyebrow">WHAT'S THERE</p>
-          <h2 class="section-title">会場で楽しめるもの</h2>
-          <p class="section-lead">つくり手の「好き」が、いろんなかたちで並びます。</p>
+          <p class="section-eyebrow">PICK UP</p>
+          <h2 class="section-title">当日楽しめる商品・体験</h2>
+          <p class="section-lead">
+            つくり手の作品を、少しだけご紹介します。<br>
+            <span class="products-hint">← 横にスワイプできます →</span>
+          </p>
         </header>
-        <div class="category-grid">
-          <article class="category-card">
-            <p class="category-tag">HANDMADE</p>
-            <h3>ハンドメイド雑貨</h3>
-            <p>一点もののアクセサリーや小物。</p>
+        <div class="product-carousel" data-product-carousel>
+          <article class="product-card">
+            <div class="product-media">
+              <img class="product-bg" src="img/works/work-beads-ring.jpg" alt="" aria-hidden="true" loading="lazy">
+              <img class="product-photo" src="img/works/work-beads-ring.jpg" alt="ビーズ刺繍のカラフルなリング" loading="lazy">
+            </div>
           </article>
-          <article class="category-card">
-            <p class="category-tag">SWEETS</p>
-            <h3>お菓子・スイーツ</h3>
-            <p>夏にぴったりの焼き菓子や甘いもの。</p>
+          <article class="product-card">
+            <div class="product-media">
+              <img class="product-bg" src="img/works/work-tea.jpg" alt="" aria-hidden="true" loading="lazy">
+              <img class="product-photo" src="img/works/work-tea.jpg" alt="ハンドメイドのティーバッグ（お茶）" loading="lazy">
+            </div>
           </article>
-          <article class="category-card">
-            <p class="category-tag">ART</p>
-            <h3>イラスト・アート</h3>
-            <p>作家さんの世界観に触れる作品。</p>
+          <article class="product-card">
+            <div class="product-media">
+              <img class="product-bg" src="img/works/work-flower-earrings.jpg" alt="" aria-hidden="true" loading="lazy">
+              <img class="product-photo" src="img/works/work-flower-earrings.jpg" alt="お花モチーフのタッセルピアス" loading="lazy">
+            </div>
           </article>
-          <article class="category-card">
-            <p class="category-tag">WORKSHOP</p>
-            <h3>ワークショップ</h3>
-            <p>その場で楽しめる体験企画。</p>
+          <article class="product-card">
+            <div class="product-media">
+              <img class="product-bg" src="img/works/work-repos-sweets.jpg" alt="" aria-hidden="true" loading="lazy">
+              <img class="product-photo" src="img/works/work-repos-sweets.jpg" alt="パティスリールポのカラフルな焼き菓子" loading="lazy">
+            </div>
+          </article>
+          <article class="product-card">
+            <div class="product-media">
+              <img class="product-bg" src="img/works/work-blue-flower.jpg" alt="" aria-hidden="true" loading="lazy">
+              <img class="product-photo" src="img/works/work-blue-flower.jpg" alt="青いお花のワイヤーアクセサリー" loading="lazy">
+            </div>
+          </article>
+          <article class="product-card">
+            <div class="product-media">
+              <img class="product-bg" src="img/works/work-coffee.jpg" alt="" aria-hidden="true" loading="lazy">
+              <img class="product-photo" src="img/works/work-coffee.jpg" alt="ハンドドリップで淹れるコーヒー" loading="lazy">
+            </div>
+          </article>
+          <article class="product-card">
+            <div class="product-media">
+              <img class="product-bg" src="img/works/work-tassel-earrings.jpg" alt="" aria-hidden="true" loading="lazy">
+              <img class="product-photo" src="img/works/work-tassel-earrings.jpg" alt="刺繍くるみボタンと黄色いタッセルのピアス" loading="lazy">
+            </div>
+          </article>
+          <article class="product-card">
+            <div class="product-media">
+              <img class="product-bg" src="img/works/work-curry.jpg" alt="" aria-hidden="true" loading="lazy">
+              <img class="product-photo" src="img/works/work-curry.jpg" alt="スパイスカレーのプレート" loading="lazy">
+            </div>
+          </article>
+          <article class="product-card">
+            <div class="product-media">
+              <img class="product-bg" src="img/works/work-illustration.jpg" alt="" aria-hidden="true" loading="lazy">
+              <img class="product-photo" src="img/works/work-illustration.jpg" alt="夏のドリンクを描いたイラスト作品" loading="lazy">
+            </div>
+          </article>
+          <article class="product-card">
+            <div class="product-media">
+              <img class="product-bg" src="img/works/work-penguin-keyholder.jpg" alt="" aria-hidden="true" loading="lazy">
+              <img class="product-photo" src="img/works/work-penguin-keyholder.jpg" alt="ペンギンのアクリルキーホルダー" loading="lazy">
+            </div>
           </article>
         </div>
+
+        <!-- 出店者一覧（隠しメニュー：クリックで開閉） -->
+        <details class="exhibitors">
+          <summary class="exhibitors-summary">
+            <span class="exhibitors-summary-label">出店者はこちら</span>
+            <span class="exhibitors-summary-icon" aria-hidden="true"></span>
+          </summary>
+          <div class="exhibitors-body">
+            <ul class="exhibitor-list">
+              <li class="exhibitor">
+                <p class="exhibitor-name">心臓アーティストmaiyan</p>
+                <p class="exhibitor-cat">絵画、缶バッチ、ポストカードなどの展示販売</p>
+                <a class="exhibitor-link" href="https://www.instagram.com/maiyan_satomai_art" target="_blank" rel="noopener noreferrer">Instagramを見る →</a>
+              </li>
+              <li class="exhibitor">
+                <p class="exhibitor-name">こばやしひろみ</p>
+                <p class="exhibitor-cat">フランス旅行の写真シェア、理想の人生を旅する体験(Future Post)</p>
+                <a class="exhibitor-link" href="https://www.instagram.com/hiromi_kobayashi_" target="_blank" rel="noopener noreferrer">Instagramを見る →</a>
+              </li>
+              <li class="exhibitor">
+                <p class="exhibitor-name">mocamare (モカマーレ)</p>
+                <p class="exhibitor-cat">つまみ細工とハンドメイドアクセサリーの展示・販売</p>
+                <a class="exhibitor-link" href="https://www.instagram.com/mocamare" target="_blank" rel="noopener noreferrer">Instagramを見る →</a>
+              </li>
+              <li class="exhibitor">
+                <p class="exhibitor-name">ちょこっと恋愛相談</p>
+                <p class="exhibitor-cat">15分間の無料恋愛相談＆フォトグラファー事業を少し紹介したい</p>
+                <a class="exhibitor-link" href="https://www.instagram.com/thermidor09i" target="_blank" rel="noopener noreferrer">Instagramを見る →</a>
+              </li>
+              <li class="exhibitor">
+                <p class="exhibitor-name">蒼滴堂</p>
+                <p class="exhibitor-cat">ハンドメイドアクセサリー</p>
+                <a class="exhibitor-link" href="https://www.instagram.com/soutekidou" target="_blank" rel="noopener noreferrer">Instagramを見る →</a>
+              </li>
+              <li class="exhibitor">
+                <p class="exhibitor-name">オイルマッサージサロン　ゆるりの木</p>
+                <p class="exhibitor-cat">ドライ&amp;オイルマッサージ(上半身、ハンド、リフレクソロジー:足裏)</p>
+                <a class="exhibitor-link" href="https://www.instagram.com/yururi_no_ki" target="_blank" rel="noopener noreferrer">Instagramを見る →</a>
+              </li>
+              <li class="exhibitor">
+                <p class="exhibitor-name">つむぎふと</p>
+                <p class="exhibitor-cat">かぎ針編み小物、アクセサリー</p>
+                <a class="exhibitor-link" href="https://www.instagram.com/tsumugift.1" target="_blank" rel="noopener noreferrer">Instagramを見る →</a>
+              </li>
+              <li class="exhibitor">
+                <p class="exhibitor-name">ひのきとコーヒー</p>
+                <p class="exhibitor-cat">イラスト雑貨、ZINEの販売</p>
+                <a class="exhibitor-link" href="https://www.instagram.com/hinoki_sayu" target="_blank" rel="noopener noreferrer">Instagramを見る →</a>
+              </li>
+              <li class="exhibitor">
+                <p class="exhibitor-name">気導術整体ヒーリフレッシュ</p>
+                <p class="exhibitor-cat">クイック整体</p>
+                <a class="exhibitor-link" href="https://www.instagram.com/saegusa_seitai" target="_blank" rel="noopener noreferrer">Instagramを見る →</a>
+              </li>
+              <li class="exhibitor">
+                <p class="exhibitor-name">Natu:re(ナチュレ)</p>
+                <p class="exhibitor-cat">イラスト雑貨、編み物雑貨</p>
+                <a class="exhibitor-link" href="https://www.instagram.com/natu_re_handmade" target="_blank" rel="noopener noreferrer">Instagramを見る →</a>
+              </li>
+              <li class="exhibitor">
+                <p class="exhibitor-name">icofu</p>
+                <p class="exhibitor-cat">ハーブティーの販売</p>
+                <a class="exhibitor-link" href="https://www.instagram.com/icofu__" target="_blank" rel="noopener noreferrer">Instagramを見る →</a>
+              </li>
+              <li class="exhibitor">
+                <p class="exhibitor-name">patisserie repos</p>
+                <p class="exhibitor-cat">グルテンフリー焼き菓子販売</p>
+                <a class="exhibitor-link" href="https://www.instagram.com/patisserierepos" target="_blank" rel="noopener noreferrer">Instagramを見る →</a>
+              </li>
+              <li class="exhibitor">
+                <p class="exhibitor-name">劔庵-TSURUGIAN-</p>
+                <p class="exhibitor-cat">和モダン金襴アクセサリー販売</p>
+                <a class="exhibitor-link" href="https://www.instagram.com/tsurugian_2022" target="_blank" rel="noopener noreferrer">Instagramを見る →</a>
+              </li>
+              <li class="exhibitor">
+                <p class="exhibitor-name">popping crush</p>
+                <p class="exhibitor-cat">アクセサリー</p>
+                <a class="exhibitor-link" href="https://www.instagram.com/popping_crush_" target="_blank" rel="noopener noreferrer">Instagramを見る →</a>
+              </li>
+              <li class="exhibitor">
+                <p class="exhibitor-name">RAW_ART</p>
+                <p class="exhibitor-cat">アートのワークショップ</p>
+                <a class="exhibitor-link" href="https://www.instagram.com/rawart___" target="_blank" rel="noopener noreferrer">Instagramを見る →</a>
+              </li>
+              <li class="exhibitor">
+                <p class="exhibitor-name">haregumi</p>
+                <p class="exhibitor-cat">羊毛フェルトを中心に使った、ハンドメイド雑貨・アクセサリーなど</p>
+                <a class="exhibitor-link" href="http://www.instagram.com/haregumi_no_heya" target="_blank" rel="noopener noreferrer">Instagramを見る →</a>
+              </li>
+              <li class="exhibitor">
+                <p class="exhibitor-name">スパイスカレーとおやつ　キュリアレンテ</p>
+                <p class="exhibitor-cat">スパイスカレーと米粉のお菓子</p>
+                <a class="exhibitor-link" href="https://www.instagram.com/curia.lente" target="_blank" rel="noopener noreferrer">Instagramを見る →</a>
+              </li>
+              <li class="exhibitor">
+                <p class="exhibitor-name">はちみつメープル</p>
+                <p class="exhibitor-cat">編み物雑貨の対面販売</p>
+                <a class="exhibitor-link" href="https://www.instagram.com/hachimitumaple" target="_blank" rel="noopener noreferrer">Instagramを見る →</a>
+              </li>
+              <li class="exhibitor">
+                <p class="exhibitor-name">Petite Kinoko</p>
+                <p class="exhibitor-cat">ハンドメイド小物販売</p>
+                <a class="exhibitor-link" href="https://www.instagram.com/petite_kinoko" target="_blank" rel="noopener noreferrer">Instagramを見る →</a>
+              </li>
+              <li class="exhibitor">
+                <p class="exhibitor-name">Hygge list</p>
+                <p class="exhibitor-cat">コーヒー豆販売</p>
+                <a class="exhibitor-link" href="https://www.instagram.com/hyggelist_" target="_blank" rel="noopener noreferrer">Instagramを見る →</a>
+              </li>
+              <li class="exhibitor">
+                <p class="exhibitor-name">hagunana</p>
+                <p class="exhibitor-cat">ハンドメイドアクセサリーの販売</p>
+                <a class="exhibitor-link" href="https://www.instagram.com/hagunana_handmade" target="_blank" rel="noopener noreferrer">Instagramを見る →</a>
+              </li>
+              <li class="exhibitor">
+                <p class="exhibitor-name">Etko-ガラスと金属-　(Etkoはエッコと読みます)</p>
+                <p class="exhibitor-cat">吹きガラス作品の販売</p>
+                <a class="exhibitor-link" href="https://www.instagram.com/etko_glass_metal" target="_blank" rel="noopener noreferrer">Instagramを見る →</a>
+              </li>
+              <li class="exhibitor">
+                <p class="exhibitor-name">Handmade shop popo</p>
+                <p class="exhibitor-cat">ペーパークイリングで制作した写真立て、ボードなどをメインに、ハンドメイド作品を販売しています。</p>
+                <a class="exhibitor-link" href="https://www.instagram.com/tmpp_quilling" target="_blank" rel="noopener noreferrer">Instagramを見る →</a>
+              </li>
+              <li class="exhibitor">
+                <p class="exhibitor-name">アクセスバーズ・アクセスフェイスリフト</p>
+                <p class="exhibitor-cat">脳の断捨離ができるアクセスバーズ。お顔がワントーン明るくなり、リフトアップするアクセスフェイスリフトを提供します。</p>
+                <a class="exhibitor-link" href="https://www.instagram.com/hitomi.universe" target="_blank" rel="noopener noreferrer">Instagramを見る →</a>
+              </li>
+              <li class="exhibitor">
+                <p class="exhibitor-name">和奏仰香</p>
+                <p class="exhibitor-cat">和の香りのアイテム・つまみ細工の販売</p>
+                <a class="exhibitor-link" href="https://www.instagram.com/kiyoko_tsuyama" target="_blank" rel="noopener noreferrer">Instagramを見る →</a>
+              </li>
+              <li class="exhibitor">
+                <p class="exhibitor-name">hana-haluka</p>
+                <p class="exhibitor-cat">ハンドメイドアクセサリー販売</p>
+                <a class="exhibitor-link" href="https://www.instagram.com/hana-haluka" target="_blank" rel="noopener noreferrer">Instagramを見る →</a>
+              </li>
+            </ul>
+            <p class="exhibitors-note">※ 出店内容は変更になる場合があります。</p>
+          </div>
+        </details>
       </div>
     </section>
 
@@ -236,53 +455,7 @@
       </div>
     </section>
 
-    <!-- ========== 6. クーポン登録フォーム ========== -->
-    <section id="register" class="section section-apply">
-      <div class="container section-inner section-narrow">
-        <header class="section-head">
-          <p class="section-eyebrow">REGISTER</p>
-          <h2 class="section-title">300円クーポンを受け取る</h2>
-          <p class="section-lead">
-            メールアドレスを登録するだけ。<br>
-            先着100名に達し次第、配布終了となります。
-          </p>
-        </header>
-
-        <form class="coupon-form" data-coupon-form novalidate>
-          <div class="coupon-field">
-            <label for="cf-email">メールアドレス <span class="coupon-req">必須</span></label>
-            <input type="email" id="cf-email" name="email" inputmode="email" autocomplete="email"
-                   placeholder="you@example.com" required>
-          </div>
-          <div class="coupon-field">
-            <label for="cf-name">お名前・ニックネーム <span class="coupon-opt">任意</span></label>
-            <input type="text" id="cf-name" name="name" autocomplete="name"
-                   placeholder="ビビ子">
-          </div>
-          <button type="submit" class="btn btn-primary btn-lg coupon-submit">300円クーポンを受け取る</button>
-          <p class="coupon-error" data-coupon-error hidden role="alert">
-            登録に失敗いたしました。お手数ですが、時間をおいて<br class="sp-only">もう一度お試しください。
-          </p>
-          <p class="coupon-form-note">
-            ボタンを押すと、ご登録のメールアドレス宛にVivitフェスタのイベント情報をお送りします。<br>
-            300円クーポンは、開催の約1週間前にメールでお届けします。<br>
-            先着100名に達し次第、配布終了となります。
-          </p>
-        </form>
-
-        <div class="coupon-done" data-coupon-done hidden>
-          <p class="coupon-done-badge">登録ありがとうございます</p>
-          <p class="coupon-done-title">クーポンは開催の約1週間前にお届けします</p>
-          <p class="coupon-done-text">
-            300円クーポンは、開催の約1週間前に<br class="sp-only">
-            ご登録のメールアドレス宛へお送りします。<br>
-            当日、会場でのお買い物にぜひご利用ください。
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== 7. FAQ ========== -->
+    <!-- ========== 6. FAQ ========== -->
     <section id="faq" class="section section-tinted">
       <div class="container section-inner section-narrow">
         <header class="section-head">
@@ -309,6 +482,19 @@
         </div>
       </div>
     </section>
+
+    <!-- ========== 7. ページ下部クーポンCTA（上部フォームへ誘導） ========== -->
+    <section id="coupon" class="section section-apply">
+      <div class="container section-inner section-narrow">
+        <div class="bottom-cta">
+          <p class="bottom-cta-lead">気になるお店は見つかりましたか？</p>
+          <p class="bottom-cta-badge">先着100名限定</p>
+          <p class="bottom-cta-title">当日使える<span class="bottom-cta-amount">300円</span>クーポン</p>
+          <p class="bottom-cta-note">開催の約1週間前に、ご登録のメールアドレスへお届けします。</p>
+          <a href="#register" class="btn btn-primary btn-lg bottom-cta-btn" data-coupon-scroll>300円クーポンを申し込む</a>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
@@ -324,9 +510,9 @@
   </footer>
 
   <!-- ========== スマホ下部固定CTA ========== -->
-  <a href="#register" class="sticky-cta" data-sticky-cta>
+  <a href="#register" class="sticky-cta" data-sticky-cta data-coupon-scroll>
     <span class="sticky-cta-label">先着100名限定</span>
-    300円クーポンを受け取る
+    300円クーポンを申し込む
   </a>
 
   <script>
@@ -336,7 +522,7 @@
     // デプロイ手順は gas/README.md を参照。
     var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbx9m5eKvea0Awl3Kx-pr5j3C4gvwDf82i7LSnvN7bYhbMmTX1Ib1a6PTn7c350piTsBKA/exec';
     (function () {
-      var SUBMIT_LABEL = '300円クーポンを受け取る';
+      var SUBMIT_LABEL = '300円クーポンを申し込む';
       var TIMEOUT_MS = 15000; // GASのコールドスタートを考慮した猶予
 
       var form = document.querySelector('[data-coupon-form]');
@@ -430,6 +616,32 @@
         });
       }, { threshold: 0.15 });
       io.observe(target);
+    })();
+
+    // ===== 各CTA → 上部フォームへスムーズ移動＋メール欄へフォーカス =====
+    (function () {
+      var links = document.querySelectorAll('[data-coupon-scroll]');
+      if (!links.length) return;
+      var reduceMotion = window.matchMedia
+        && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      links.forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          var form = document.getElementById('register');
+          var emailInput = document.getElementById('cf-email');
+          if (!form) return; // フォームが無ければ通常のアンカー動作に任せる
+          e.preventDefault();
+          form.scrollIntoView({
+            behavior: reduceMotion ? 'auto' : 'smooth',
+            block: 'start'
+          });
+          window.setTimeout(function () {
+            if (emailInput && !emailInput.disabled && !form.querySelector('[data-coupon-form]').hidden) {
+              try { emailInput.focus({ preventScroll: true }); } catch (err) { emailInput.focus(); }
+            }
+          }, reduceMotion ? 0 : 500);
+        });
+      });
     })();
 
     // ===== 雰囲気スライダー（出店者向けLPと共通仕様） =====

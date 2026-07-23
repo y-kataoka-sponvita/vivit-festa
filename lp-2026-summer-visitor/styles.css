@@ -1303,9 +1303,13 @@ html, body { overflow-x: clip; }
 /* ---- Hero coupon card ---- */
 .hero-visitor .hero-inner { max-width: 760px; }
 /* FV縦圧縮：スマホ初回表示に ¥300＋CTA を収める */
-.hero-visitor .eyebrow { margin-bottom: 18px; }
-.hero-visitor .hero-title { margin-bottom: 16px; }
-.hero-visitor .hero-lead { margin-bottom: 24px; }
+.hero-visitor .eyebrow { margin-bottom: 16px; }
+/* メインコピーは控えめにして、下のクーポンカードを主役にする */
+.hero-visitor .hero-title {
+  font-size: clamp(24px, 4.6vw, 40px);
+  margin-bottom: 14px;
+}
+.hero-visitor .hero-lead { margin-bottom: 22px; }
 
 .hero-coupon {
   position: relative;
@@ -1588,5 +1592,297 @@ html, body { overflow-x: clip; }
   font-size: 13.5px;
   font-weight: 700;
   line-height: 1.7;
+  text-align: center;
+}
+
+/* ========================================================================
+   来場者LP 改修（2026-07）
+   FV内の登録カード / 商品・体験カルーセル / 下部CTA / 画像プレースホルダー
+   ======================================================================== */
+
+/* 固定ヘッダー分のアンカーオフセット（下部CTAから上部フォームへ移動時に隠れない） */
+#register { scroll-margin-top: calc(var(--header-h) + 12px); }
+
+/* ---- ファーストビュー内の登録カード（白カード） ---- */
+.hero-register {
+  margin: 22px auto 36px;
+  max-width: 460px;
+  padding: clamp(22px, 4vw, 32px);
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+}
+/* 先着100名（数字を大きく強調） */
+.hero-register-kicker {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--color-ink);
+  letter-spacing: 0.02em;
+  margin-bottom: 6px;
+}
+.hero-register-count {
+  font-size: 40px;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--color-accent);
+  margin: 0 3px;
+  letter-spacing: 0.01em;
+}
+.hero-register-limit {
+  margin-left: 4px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #fff;
+  background: var(--color-accent);
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  align-self: center;
+}
+.hero-register-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-ink);
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+  margin-bottom: 14px;
+}
+.hero-register-amount {
+  display: block;
+  margin-top: 2px;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--color-accent);
+  font-size: clamp(56px, 14vw, 84px);
+  letter-spacing: 0.01em;
+}
+.hero-register-free {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--color-ink-soft);
+  margin-bottom: 16px;
+}
+.hero-register-amount .yen {
+  font-size: 0.42em;
+  vertical-align: 0.32em;
+  margin-right: 2px;
+}
+.hero-register-amount .unit {
+  font-size: 0.26em;
+  font-weight: 800;
+  color: var(--color-ink);
+  margin-left: 6px;
+  vertical-align: 0.5em;
+}
+/* FV内フォームは白カードの中なので、フォーム自体の装飾を外してフラットに */
+.coupon-form-hero {
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+  gap: 16px;
+  text-align: left;
+}
+/* 完了表示もカード内ではフラットに */
+.hero-register .coupon-done {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 20px 4px;
+}
+
+/* ---- 画像プレースホルダー共通ラベル ---- */
+.media-ph-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+}
+
+/* ---- 商品・体験カルーセル（横スクロール / scroll-snap） ---- */
+.products-hint {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--color-primary);
+}
+.product-carousel {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(220px, 1fr);
+  gap: 18px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 10px;
+  scrollbar-width: thin;
+}
+.product-card {
+  scroll-snap-align: start;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.product-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1; /* インスタの正方形。写真は切らずに全体表示 */
+  overflow: hidden;
+  background: var(--color-surface-tinted);
+}
+/* 余白を自然に埋めるぼかし背景（同じ画像） */
+.product-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.15);
+  filter: blur(20px) brightness(0.92) saturate(1.1);
+}
+/* 主役が見切れないよう全体を表示 */
+.product-photo {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+@media (min-width: 721px) {
+  .product-carousel { grid-auto-columns: minmax(240px, 1fr); }
+}
+
+/* ---- 下部クーポンCTA ---- */
+.bottom-cta {
+  text-align: center;
+  padding: clamp(32px, 5vw, 48px) clamp(20px, 4vw, 40px);
+  background:
+    radial-gradient(60% 80% at 50% 0%, rgba(212, 62, 33, 0.12), transparent 70%),
+    var(--color-surface);
+  border: 1px solid rgba(62, 32, 109, 0.18);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+.bottom-cta-lead {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-ink);
+  margin-bottom: 16px;
+}
+.bottom-cta-badge {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: #fff;
+  background: var(--color-accent);
+  padding: 5px 16px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 10px;
+}
+.bottom-cta-title {
+  font-size: clamp(20px, 3.5vw, 26px);
+  font-weight: 900;
+  color: var(--color-ink);
+  margin-bottom: 8px;
+}
+.bottom-cta-amount { color: var(--color-accent); }
+.bottom-cta-note {
+  font-size: 13px;
+  color: var(--color-ink-soft);
+  margin-bottom: 22px;
+}
+.bottom-cta-btn { width: min(100%, 360px); white-space: normal; }
+
+/* ---- 出店者一覧（隠しメニュー / details） ---- */
+.exhibitors {
+  max-width: 640px;
+  margin: 44px auto 0;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+.exhibitors-summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 18px 24px;
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  color: var(--color-primary);
+  -webkit-user-select: none;
+  user-select: none;
+}
+.exhibitors-summary::-webkit-details-marker { display: none; }
+.exhibitors-summary:hover { color: var(--color-accent); }
+.exhibitors-summary-icon {
+  width: 9px;
+  height: 9px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 0.25s ease;
+}
+.exhibitors[open] .exhibitors-summary-icon { transform: rotate(-135deg); }
+.exhibitors-body {
+  padding: 6px 18px 24px;
+  border-top: 1px solid var(--color-line);
+}
+.exhibitor-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+.exhibitor {
+  padding: 18px 20px;
+  background: var(--color-surface-tinted);
+  border-radius: var(--radius-md);
+  text-align: left;
+}
+.exhibitor-name {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--color-ink);
+  margin-bottom: 4px;
+}
+.exhibitor-cat {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--color-primary);
+  margin-bottom: 8px;
+}
+.exhibitor-desc {
+  font-size: 13.5px;
+  line-height: 1.8;
+  color: var(--color-ink-soft);
+  margin-bottom: 10px;
+}
+.exhibitor-link {
+  display: inline-block;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--color-accent);
+  border-bottom: 1px solid currentColor;
+}
+.exhibitors-note {
+  margin-top: 16px;
+  font-size: 12px;
+  color: var(--color-muted);
   text-align: center;
 }
