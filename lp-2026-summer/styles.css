@@ -213,6 +213,26 @@ p { margin: 0; }
   margin-bottom: 40px;
   max-width: 600px;
 }
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+  padding: 9px 22px;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent);
+  color: #fff;
+  font-weight: 900;
+  font-size: clamp(15px, 2vw, 18px);
+  letter-spacing: 0.1em;
+  box-shadow: 0 12px 30px rgba(212, 62, 33, 0.42);
+}
+.hero-badge span {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  opacity: 0.95;
+}
 .hero-cta {
   display: flex;
   flex-wrap: wrap;
