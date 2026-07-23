@@ -1886,3 +1886,17 @@ html, body { overflow-x: clip; }
   color: var(--color-muted);
   text-align: center;
 }
+
+/* ---- FVメタ：会場名（GOBLIN.北参道 + -ROADSIDE-）を意図的に2行で整える ---- */
+.hero-meta-venue {
+  line-height: 1.3;
+  white-space: nowrap;           /* 「GOBLIN.北参道」を1行に保つ */
+  font-size: clamp(15px, 1.8vw, 18px);
+}
+.hero-meta-venue .venue-roadside {
+  display: block;                /* -ROADSIDE- を次の行へ */
+  font-size: 0.66em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.8);
+}
