@@ -478,7 +478,7 @@ p { margin: 0; }
 /* ========== Categories ========== */
 .category-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr); /* 2×2 レイアウト */
   gap: 20px;
 }
 .category-card {
@@ -574,7 +574,7 @@ p { margin: 0; }
   .category-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 520px) {
-  .category-grid { grid-template-columns: 1fr; }
+  .category-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
 }
 
 /* ========== Booth types ========== */
@@ -1744,7 +1744,7 @@ html, body { overflow-x: clip; }
 .product-carousel {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: minmax(220px, 1fr);
+  grid-auto-columns: 75%;      /* スマホ：画像を大きく／次カードは1/4ほど覗く */
   gap: 18px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
@@ -1777,15 +1777,15 @@ html, body { overflow-x: clip; }
   transform: scale(1.15);
   filter: blur(20px) brightness(0.92) saturate(1.1);
 }
-/* 主役が見切れないよう全体を表示 */
+/* 1:1 に収まるよう中央トリミング表示 */
 .product-photo {
   position: relative;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
-@media (min-width: 721px) {
-  .product-carousel { grid-auto-columns: minmax(240px, 1fr); }
+@media (min-width: 560px) {
+  .product-carousel { grid-auto-columns: 300px; } /* タブレット/PC：大きめの正方形を複数表示 */
 }
 
 /* ---- 下部クーポンCTA ---- */
@@ -1930,3 +1930,14 @@ html, body { overflow-x: clip; }
   letter-spacing: 0.1em;
   color: rgba(255, 255, 255, 0.8);
 }
+
+/* ---- ATMOSPHERE：テーマを目立たせる紫→赤グラデ背景（文字は白で視認性確保） ---- */
+.section-atmosphere {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary) 30%, var(--color-accent) 100%);
+}
+.section-atmosphere .section-eyebrow { color: var(--color-cream); }
+.section-atmosphere .section-title { color: #fff; }
+.section-atmosphere .section-lead { color: rgba(255, 255, 255, 0.92); }
+/* スライダーのドットを白基調に（グラデ背景でも見えるよう） */
+.section-atmosphere .concept-slider-dot { background: rgba(255, 255, 255, 0.45); }
+.section-atmosphere .concept-slider-dot.is-active { background: #fff; }
